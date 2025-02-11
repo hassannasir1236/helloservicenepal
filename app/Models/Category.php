@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 
 class Category extends Model {
-    use HasFactory;
+    use HasFactory, HasRecursiveRelationships;
 
     protected $fillable = [
         'name',

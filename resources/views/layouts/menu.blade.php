@@ -447,6 +447,13 @@ $role_has_permission = App\Models\Permission::where('role_id',$user->role_id)->p
             <ul aria-expanded="false" class="collapse">
 
                 <li>
+                    <a class="waves-effect waves-dark" href="{!! url('echome') !!}" aria-expanded="false">
+
+                        <span class="hide-menu">{{trans('lang.e_dashboard')}}</span>
+
+                    </a>
+                </li>
+                <li>
                     <a class="waves-effect waves-dark" href="{!! url('category') !!}" aria-expanded="false">
 
                         <span class="hide-menu">{{trans('lang.category_plural')}}</span>
@@ -463,7 +470,9 @@ $role_has_permission = App\Models\Permission::where('role_id',$user->role_id)->p
                     </a>
 
                     <ul aria-expanded="false" class="collapse document_sub_menu">
-
+                        <li class="all_document_menu">
+                            <a href="{!! url('documents') !!}">{{trans('lang.e_dashboard')}}</a>
+                        </li>
                         <li class="all_document_menu">
                             <a href="{!! url('documents') !!}">{{trans('lang.all_document_plural')}}</a>
                         </li>

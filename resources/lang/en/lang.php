@@ -2601,6 +2601,8 @@ return [
     'go_ride' => 'Go Ride Service',
     'e_classified' => 'EClassified',
 
+    'e_dashboard' => 'Dashboard',
+
     'zone'=>'Zone',
     'zone_plural'=>'Zone',
     'zone_table'=>'Zone List',

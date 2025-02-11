@@ -2,6 +2,41 @@
 
 use Illuminate\Support\Facades\Route;
 
+
+
+
+// EClassify routes define 
+use App\Http\Controllers\EClassify\BlogController;
+use App\Http\Controllers\EClassify\CategoryController;
+use App\Http\Controllers\EClassify\Controller;
+use App\Http\Controllers\EClassify\CustomersController;
+use App\Http\Controllers\EClassify\CustomFieldController;
+use App\Http\Controllers\EClassify\FaqController;
+use App\Http\Controllers\EClassify\FeatureSectionController;
+// use App\Http\Controllers\EClassify\HomeController;
+use App\Http\Controllers\EClassify\InstallerController;
+use App\Http\Controllers\EClassify\ItemController;
+use App\Http\Controllers\EClassify\LanguageController;
+use App\Http\Controllers\EClassify\NotificationController;
+use App\Http\Controllers\EClassify\PackageController;
+use App\Http\Controllers\EClassify\PlaceController;
+use App\Http\Controllers\EClassify\ReportReasonController;
+use App\Http\Controllers\EClassify\RoleController;
+use App\Http\Controllers\EClassify\SeoSettingController;
+use App\Http\Controllers\EClassify\SettingController;
+use App\Http\Controllers\EClassify\SliderController;
+use App\Http\Controllers\EClassify\StaffController;
+use App\Http\Controllers\EClassify\SystemUpdateController;
+use App\Http\Controllers\EClassify\TipController;
+use App\Http\Controllers\EClassify\UserVerificationController;
+use App\Http\Controllers\EClassify\WebhookController;
+use App\Models\UserVerification;
+use App\Services\CachingService;
+use Illuminate\Support\Facades\Artisan;
+// use Illuminate\Support\Facades\Auth;
+// use Illuminate\Support\Facades\Route;
+use Rap2hpoutre\LaravelLogViewer\LogViewerController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -1044,13 +1079,69 @@ Route::post('check-payout-status', [App\Http\Controllers\UserController::class,'
 
 // EClassify Routes
 
+    Route::get('/echome', [App\Http\Controllers\EClassify\HomeController::class, 'index'])->name('echome');
+    Route::get('change-password', [App\Http\Controllers\EClassify\HomeController::class, 'changePasswordIndex'])->name('change-password.index');
+    Route::post('change-password', [App\Http\Controllers\EClassify\HomeController::class, 'changePasswordUpdate'])->name('change-password.update');
+
+    Route::get('change-profile', [App\Http\Controllers\EClassify\HomeController::class, 'changeProfileIndex'])->name('change-profile.index');
+    Route::post('change-profile', [App\Http\Controllers\EClassify\HomeController::class, 'changeProfileUpdate'])->name('change-profile.update');
+    /*** Home Module : END ***/
+
+    /*** Category Module : START ***/
+    Route::resource('category', App\Http\Controllers\EClassify\CategoryController::class);
+    Route::group(['prefix' => 'category'], static function () {
+        Route::get('/{id}/subcategories', [App\Http\Controllers\EClassify\CategoryController::class, 'getSubCategories'])->name('category.subcategories');
+        Route::get('/{id}/custom-fields', [App\Http\Controllers\EClassify\CategoryController::class, 'customFields'])->name('category.custom-fields');
+        Route::get('/{id}/custom-fields/show', [App\Http\Controllers\EClassify\CategoryController::class, 'getCategoryCustomFields'])->name('category.custom-fields.show');
+        Route::delete('/{id}/custom-fields/{customFieldID}/delete', [App\Http\Controllers\EClassify\CategoryController::class, 'destroyCategoryCustomField'])->name('category.custom-fields.destroy');
+    });
+    /*** Category Module : END ***/
+
+    /*** Custom Field Module : START ***/
+    Route::group(['prefix' => 'custom-fields'], static function () {
+        Route::post('/{id}/value/add', [App\Http\Controllers\EClassify\CustomFieldController::class, 'addCustomFieldValue'])->name('custom-fields.value.add');
+        Route::get('/{id}/value/show', [App\Http\Controllers\EClassify\CustomFieldController::class, 'getCustomFieldValues'])->name('custom-fields.value.show');
+        Route::put('/{id}/value/edit', [App\Http\Controllers\EClassify\CustomFieldController::class, 'updateCustomFieldValue'])->name('custom-fields.value.update');
+        Route::delete('/{id}/value/{value}/delete', [App\Http\Controllers\EClassify\CustomFieldController::class, 'deleteCustomFieldValue'])->name('custom-fields.value.delete');
+    });
+    Route::resource('custom-fields', App\Http\Controllers\EClassify\CustomFieldController::class);
+
+  /*** Feature Section Module : START ***/
+  Route::resource('feature-section', App\Http\Controllers\EClassify\FeatureSectionController::class);
+  Route::resource('item', App\Http\Controllers\EClassify\ItemController::class);
+
+
+  Route::group(['prefix' => 'contact-us'], static function () {
+    Route::get('/', [App\Http\Controllers\EClassify\Controller::class, 'contactUsUIndex'])->name('contact-us.index');
+    Route::get('/show', [App\Http\Controllers\EClassify\Controller::class, 'contactUsShow'])->name('contact-us.show');
+});
+  /*** Language Module : START ***/
+  Route::group(['prefix' => 'language'], static function () {
+    Route::get('set-language/{lang}', [App\Http\Controllers\EClassify\LanguageController::class, 'setLanguage'])->name('language.set-current');
+    Route::get('download/panel', [App\Http\Controllers\EClassify\LanguageController::class, 'downloadPanelFile'])->name('language.download.panel.json');
+    Route::get('download/app', [App\Http\Controllers\EClassify\LanguageController::class, 'downloadAppFile'])->name('language.download.app.json');
+    Route::get('download/web', [App\Http\Controllers\EClassify\LanguageController::class, 'downloadWebFile'])->name('language.download.web.json');
+
+    Route::put('/language/update/{id}/{type}', [App\Http\Controllers\EClassify\LanguageController::class, 'updatelanguage'])->name('updatelanguage');
+    Route::get('languageedit/{id}/{type}', [App\Http\Controllers\EClassify\LanguageController::class, 'editLanguage'])->name('languageedit');
+});
+Route::resource('language', App\Http\Controllers\EClassify\LanguageController::class);
+Route::group(['prefix' => 'common'], static function () {
+    Route::get('/js/lang', [App\Http\Controllers\EClassify\Controller::class, 'readLanguageFile'])->name('common.language.read');
+});
+
+
+
+
+
+
  /*** Category Module : START ***/
- Route::resource('category', App\Http\Controllers\CategoriesController::class);
- Route::group(['prefix' => 'category'], static function () {
-     Route::get('/{id}/subcategories', [App\Http\Controllers\CategoriesController::class, 'getSubCategories'])->name('category.subcategories');
-     Route::get('/{id}/custom-fields', [App\Http\Controllers\CategoriesController::class, 'customFields'])->name('category.custom-fields');
-     Route::get('/{id}/custom-fields/show', [App\Http\Controllers\CategoriesController::class, 'getCategoryCustomFields'])->name('category.custom-fields.show');
-     Route::delete('/{id}/custom-fields/{customFieldID}/delete', [App\Http\Controllers\CategoriesController::class, 'destroyCategoryCustomField'])->name('category.custom-fields.destroy');
- })->name('category');
+//  Route::resource('category', App\Http\Controllers\CategoriesController::class);
+//  Route::group(['prefix' => 'category'], static function () {
+//      Route::get('/{id}/subcategories', [App\Http\Controllers\CategoriesController::class, 'getSubCategories'])->name('category.subcategories');
+//      Route::get('/{id}/custom-fields', [App\Http\Controllers\CategoriesController::class, 'customFields'])->name('category.custom-fields');
+//      Route::get('/{id}/custom-fields/show', [App\Http\Controllers\CategoriesController::class, 'getCategoryCustomFields'])->name('category.custom-fields.show');
+//      Route::delete('/{id}/custom-fields/{customFieldID}/delete', [App\Http\Controllers\CategoriesController::class, 'destroyCategoryCustomField'])->name('category.custom-fields.destroy');
+//  })->name('category');
  /*** Category Module : END ***/
 
