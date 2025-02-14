@@ -17,13 +17,13 @@ use App\Http\Controllers\Controller;
 class ItemController extends Controller {
 
     public function index() {
-        ResponseService::noAnyPermissionThenRedirect(['item-list', 'item-update', 'item-delete']);
-        return view('items.index');
+        //ResponseService::noAnyPermissionThenRedirect(['item-list', 'item-update', 'item-delete']);
+        return view('EClassify.items.index');
     }
 
     public function show(Request $request) {
         try {
-            ResponseService::noPermissionThenSendJson('item-list');
+            //ResponseService::noPermissionThenSendJson('item-list');
             $offset = $request->input('offset', 0);
             $limit = $request->input('limit', 10);
             $sort = $request->input('sort', 'sequence');
@@ -69,17 +69,18 @@ class ItemController extends Controller {
                 });
                 $tempRow = $row->toArray();
                 $operate = '';
-                if (count($row->custom_fields) > 0 && Auth::user()->can('item-list')) {
+                // if (count($row->custom_fields) > 0 && Auth::user()->can('item-list')) {
+                if (count($row->custom_fields) > 0) {
                     // View Custom Field
                     $operate .= BootstrapTableService::button('fa fa-eye', '#', ['editdata', 'btn-light-danger  '], ['title' => __("View"), "data-bs-target" => "#editModal", "data-bs-toggle" => "modal",]);
                 }
 
-                if ($row->status !== 'sold out' && Auth::user()->can('item-update')) {
+                // if ($row->status !== 'sold out' && Auth::user()->can('item-update')) {
                     $operate .= BootstrapTableService::editButton(route('item.approval', $row->id), true, '#editStatusModal', 'edit-status', $row->id);
-                }
-                if (Auth::user()->can('item-delete')) {
+                // }
+                // if (Auth::user()->can('item-delete')) {
                     $operate .= BootstrapTableService::deleteButton(route('item.destroy', $row->id));
-                }
+                // }
                 $tempRow['active_status'] = empty($row->deleted_at);//IF deleted_at is empty then status is true else false
                 $tempRow['operate'] = $operate;
 
@@ -96,7 +97,7 @@ class ItemController extends Controller {
 
     public function updateItemApproval(Request $request, $id) {
         try {
-            ResponseService::noPermissionThenSendJson('item-update');
+            // ResponseService::noPermissionThenSendJson('item-update');
             $item = Item::with('user')->withTrashed()->findOrFail($id);
             $item->update([
                 ...$request->all(),
@@ -114,7 +115,7 @@ class ItemController extends Controller {
     }
 
     public function destroy($id) {
-        ResponseService::noPermissionThenSendJson('item-delete');
+        // ResponseService::noPermissionThenSendJson('item-delete');
 
         try {
             $item = Item::with('gallery_images')->withTrashed()->findOrFail($id);

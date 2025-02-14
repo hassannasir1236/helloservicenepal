@@ -1,4 +1,4 @@
-<!-- <header>
+<header>
     <nav class="navbar navbar-expand navbar-light" style="background-color: white;">
         <div class="container-fluid">
 
@@ -19,7 +19,7 @@
             </div>
             <div class="col-6 justify-content-end d-flex">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <div class="dropdown">
+                    <!-- <div class="dropdown">
                         <a href="#" id="topbarUserDropdown" class="user-dropdown d-flex align-items-center dropend dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                             <div class="avatar avatar-md2">
                                 <button class="dropdown-btn">
@@ -45,9 +45,9 @@
                                 </li>
                             @endforeach    --}}
                         </ul>
-                    </div>
+                    </div> -->
                     &nbsp;&nbsp;
-                    <div class="dropdown">
+                    <!-- <div class="dropdown">
                         <a href="#" id="topbarUserDropdown"
                            class="user-dropdown d-flex align-items-center dropend dropdown-toggle"
                            data-bs-toggle="dropdown" aria-expanded="false">
@@ -67,9 +67,9 @@
                                 {{ csrf_field() }}
                             </form>
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
     </nav>
-</header> -->
+</header>

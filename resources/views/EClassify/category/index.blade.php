@@ -1,4 +1,5 @@
 @extends('layouts.main')
+@section('page-type', 'Eclassify')
 @section('title')
     {{__("Create Categories")}}
 @endsection
@@ -12,13 +13,13 @@
             <div class="col-12 col-md-6 d-flex justify-content-end">
                 @if (!empty($category))
                     <a class="btn btn-primary me-2" href="{{ route('category.index') }}">< {{__("Back to All Categories")}} </a>
-                    @can('category-create')
+              {{--  @can('category-create')  --}}
                         <a class="btn btn-primary me-2" href="{{ route('category.create', ['id' => $category->id]) }}">+ {{__("Add Subcategory")}} - /{{ $category->name }} </a>
-                    @endcanany
+                 {{--   @endcanany  --}}
                 @else
-                    @can('category-create')
+                   {{-- @can('category-create')  --}}
                         <a class="btn btn-primary"  href="{{ route('category.create') }}">+ {{__("Add Category")}} </a>
-                    @endcan
+                   {{-- @endcan  --}}
                 @endif
             </div>
         </div>
@@ -52,12 +53,12 @@
                                 <th scope="col" data-field="image" data-align="center" data-formatter="imageFormatter">{{ __('Image') }}</th>
                                 <th scope="col" data-field="subcategories_count" data-align="center" data-sortable="true" data-formatter="subCategoryFormatter">{{ __('Subcategories') }}</th>
                                 <th scope="col" data-field="custom_fields_count" data-align="center" data-sortable="true" data-formatter="customFieldFormatter">{{ __('Custom Fields') }}</th>
-                                @can('category-update')
+                                {{--  @can('category-update') --}}
                                     <th scope="col" data-field="status" data-width="5" data-sortable="true"  data-formatter="statusSwitchFormatter">{{ __('Active') }}</th>
-                                @endcan
-                                @canany(['category-update', 'category-delete'])
+                                {{--  @endcanany --}}
+                                {{-- @canany(['category-update', 'category-delete'])  --}}
                                     <th scope="col" data-field="operate" data-escape="false" data-sortable="false">{{ __('Action') }}</th>
-                                @endcanany
+                                {{-- @endcanany --}}
                             </tr>
                             </thead>
                         </table>

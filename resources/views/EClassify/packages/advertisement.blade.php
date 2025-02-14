@@ -18,7 +18,7 @@
 @section('content')
     <section class="section">
         <div class="row">
-            @can('advertisement-package-create')
+            {{-- @can('advertisement-package-create') --}}
                 <div class="col-md-4">
                     <div class="card">
                         {!! Form::open(['route' => 'package.advertisement.store', 'data-parsley-validate', 'files' => true,'class'=>'create-form']) !!}
@@ -153,8 +153,9 @@
                         {!! Form::close() !!}
                     </div>
                 </div>
-            @endcan
-            <div class="{{\Illuminate\Support\Facades\Auth::user()->can('advertisement-package-create') ? "col-md-8" : "col-md-12"}}">
+           {{-- @endcan --}}
+            <!-- <div class="{{\Illuminate\Support\Facades\Auth::user()->can('advertisement-package-create') ? "col-md-8" : "col-md-12"}}"> -->
+            <div class="{{\Illuminate\Support\Facades\Auth::user()->can('advertisement-package-create') ? "col-md-8" : "col-md-8"}}">
                 <div class="card">
                     <div class="card-body">
 
@@ -185,10 +186,10 @@
                                         <th scope="col" data-field="duration" data-align="center" data-sortable="true">{{ __('Days') }}</th>
                                         <th scope="col" data-field="item_limit" data-align="center" data-sortable="true">{{ __('Item Limit') }}</th>
                                         <th scope="col" data-field="ios_product_id" data-align="center" data-sortable="true" data-visible="false">{{ __('IOS Product ID') }}</th>
-                                        @can('item-listing-package-update')
+                                       {{-- @can('item-listing-package-update') --}}
                                             <th scope="col" data-field="status" data-sortable="true" data-align="center" data-width="5%" data-formatter="statusSwitchFormatter">{{ __('Status') }}</th>
                                             <th scope="col" data-field="operate" data-escape="false" data-align="center" data-sortable="false" data-events="advertisementPackageEvents">{{ __('Action') }}</th>
-                                        @endcan
+                                        {{-- @endcan --}}
                                     </tr>
                                     </thead>
                                 </table>

@@ -10,9 +10,9 @@
                 <h4 class="mb-0">@yield('title')</h4>
             </div>
             <div class="col-12 col-md-6 d-flex justify-content-end">
-                @can('tips-create')
+                {{-- @can('tips-create') --}}
                     <a class="btn btn-primary" href="{{ route('tips.create') }}">+ {{__("Add Tip")}} </a>
-                @endcan
+               {{-- @endcan --}}
             </div>
         </div>
     </div>
@@ -44,12 +44,12 @@
                                 <tr>
                                     <th scope="col" data-field="id" data-align="center" data-sortable="true">{{ __('ID') }}</th>
                                     <th scope="col" data-field="description" data-align="center" data-sortable="true" data-formatter="descriptionFormatter">{{ __('Description') }}</th>
-                                    @can('tips-update')
+                                  {{--  @can('tips-update') --}}
                                         <th scope="col" data-field="status" data-width="5" data-sortable="true" data-formatter="statusSwitchFormatter">{{ __('Active') }}</th>
-                                    @endcan
-                                    @canany(['tips-update', 'tips-delete'])
+                                     {{--  @endcan --}}
+                                     {{-- @canany(['tips-update', 'tips-delete']) --}}
                                         <th scope="col" data-field="operate" data-escape="false" data-sortable="false">{{ __('Action') }}</th>
-                                    @endcanany
+                                    {{--@endcanany--}}
                                 </tr>
                                 </thead>
                             </table>

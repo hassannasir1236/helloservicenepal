@@ -18,6 +18,7 @@ use Throwable;
 use function compact;
 use function view;
 use App\Http\Controllers\Controller; 
+use Intervention\Image\Facades\Image;
 
 class CategoryController extends Controller {
     private string $uploadFolder;
@@ -27,13 +28,13 @@ class CategoryController extends Controller {
     }
 
     public function index() {
-       // ResponseService::noAnyPermissionThenRedirect(['category-list', 'category-create', 'category-update', 'category-delete']);
+      // ResponseService::noAnyPermissionThenRedirect(['category-list', 'category-create', 'category-update', 'category-delete']);
         return view('EClassify.category.index');
     }
 
     public function create(Request $request) {
         $languages = CachingService::getLanguages()->where('code', '!=', 'en')->values();
-        ResponseService::noPermissionThenRedirect('category-create');
+      //  ResponseService::noPermissionThenRedirect('category-create');
         $categories = Category::with('subcategories');
         if (isset($request->id)) {
             $categories = $categories->where('parent_category_id', $request->id)->orWhere('id', $request->id);
@@ -41,11 +42,12 @@ class CategoryController extends Controller {
             $categories = $categories->whereNull('parent_category_id');
         }
         $categories = $categories->get();
-        return view('category.create', compact('categories', 'languages'));
+        return view('EClassify.category.create', compact('categories', 'languages'));
     }
 
     public function store(Request $request) {
-        ResponseService::noPermissionThenSendJson('category-create');
+
+       // ResponseService::noPermissionThenSendJson('category-create');
         $request->validate([
             'name'               => 'required',
             'image'              => 'required|mimes:jpg,jpeg,png|max:4096',
@@ -87,7 +89,7 @@ class CategoryController extends Controller {
 
 
     public function show(Request $request, $id) {
-        ResponseService::noPermissionThenSendJson('category-list');
+       // ResponseService::noPermissionThenSendJson('category-list');
         $offset = $request->input('offset', 0);
         $limit = $request->input('limit', 10);
         $sort = $request->input('sort', 'sequence');
@@ -110,13 +112,13 @@ class CategoryController extends Controller {
         $no = 1;
         foreach ($result as $key => $row) {
             $operate = '';
-            if (Auth::user()->can('category-update')) {
+            // if (Auth::user()->can('category-update')) {
                 $operate .= BootstrapTableService::editButton(route('category.edit', $row->id));
-            }
+            // }
 
-            if (Auth::user()->can('category-edit')) {
+            // if (Auth::user()->can('category-edit')) {
                 $operate .= BootstrapTableService::deleteButton(route('category.destroy', $row->id));
-            }
+            // }
             $tempRow = $row->toArray();
             $tempRow['no'] = $no++;
             $tempRow['operate'] = $operate;
@@ -129,7 +131,7 @@ class CategoryController extends Controller {
     }
 
     public function edit($id) {
-        ResponseService::noPermissionThenRedirect('category-update');
+       // ResponseService::noPermissionThenRedirect('category-update');
         $category_data = Category::findOrFail($id);
         // Fetch translations for the category
         $translations = $category_data->translations->pluck('name', 'language_id')->toArray();
@@ -140,11 +142,11 @@ class CategoryController extends Controller {
         // Fetch all languages
         $languages = CachingService::getLanguages()->where('code', '!=', 'en')->values();
 
-        return view('category.edit', compact('category_data', 'parent_category', 'translations', 'languages'));
+        return view('EClassify.category.edit', compact('category_data', 'parent_category', 'translations', 'languages'));
     }
 
     public function update(Request $request, $id) {
-        ResponseService::noPermissionThenSendJson('category-update');
+       // ResponseService::noPermissionThenSendJson('category-update');
         try {
             $request->validate([
                 'name'            => 'nullable',
@@ -189,7 +191,7 @@ class CategoryController extends Controller {
     }
 
     public function destroy($id) {
-        ResponseService::noPermissionThenSendJson('category-delete');
+        // ResponseService::noPermissionThenSendJson('category-delete');
         try {
             $category = Category::find($id);
             if ($category->delete()) {
@@ -205,18 +207,18 @@ class CategoryController extends Controller {
     }
 
     public function getSubCategories($id) {
-        ResponseService::noPermissionThenRedirect('category-list');
+       // ResponseService::noPermissionThenRedirect('category-list');
         $subcategories = Category::where('parent_category_id', $id)
             ->withCount('custom_fields')
             ->get()
             ->map(function ($subcategory) {
                 $operate = '';
-                if (Auth::user()->can('category-update')) {
+                // if (Auth::user()->can('category-update')) {
                     $operate .= BootstrapTableService::editButton(route('category.edit', $subcategory->id));
-                }
-                if (Auth::user()->can('category-delete')) {
+                // }
+                // if (Auth::user()->can('category-delete')) {
                     $operate .= BootstrapTableService::deleteButton(route('category.destroy', $subcategory->id));
-                }
+                // }
                 $subcategory->operate = $operate;
                 return $subcategory;
             });
@@ -225,7 +227,7 @@ class CategoryController extends Controller {
     }
 
     public function customFields($id) {
-        ResponseService::noPermissionThenRedirect('custom-field-list');
+       // ResponseService::noPermissionThenRedirect('custom-field-list');
         $category = Category::find($id);
         $p_id = $category->parent_category_id;
         $cat_id = $category->id;
@@ -235,7 +237,7 @@ class CategoryController extends Controller {
     }
 
     public function getCategoryCustomFields(Request $request, $id) {
-        ResponseService::noPermissionThenSendJson('custom-field-list');
+       // ResponseService::noPermissionThenSendJson('custom-field-list');
         $offset = $request->input('offset', 0);
         $limit = $request->input('limit', 10);
         $sort = $request->input('sort', 'id');

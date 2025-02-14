@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.main')
 @section('page-type', 'Eclassify')
 @section('title')
     {{__('Home')}}

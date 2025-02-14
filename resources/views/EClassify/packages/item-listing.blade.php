@@ -18,7 +18,7 @@
 @section('content')
     <section class="section">
         <div class="row">
-            @can('item-listing-package-create')
+            {{-- @can('item-listing-package-create') --}}
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card">
@@ -177,8 +177,9 @@
                         </div>
                     </div>
                 </div>
-            @endcan
-            <div class="{{\Illuminate\Support\Facades\Auth::user()->can('item-listing-package-create') ? "col-md-8" : "col-md-12"}}">
+            {{--  @endcan --}}
+            <!-- <div class="{{\Illuminate\Support\Facades\Auth::user()->can('item-listing-package-create') ? "col-md-8" : "col-md-12"}}"> -->
+            <div class="{{\Illuminate\Support\Facades\Auth::user()->can('item-listing-package-create') ? "col-md-8" : "col-md-8"}}">
                 <div class="card">
                     <div class="card-body">
 
@@ -211,10 +212,10 @@
                                         <th scope="col" data-field="final_price" data-align="center" data-sortable="true">{{ __('Final Price') }}</th>
                                         <th scope="col" data-field="description" data-align="center" data-sortable="true" data-visible="false">{{ __('Description') }}</th>
                                         <th scope="col" data-field="ios_product_id" data-align="center" data-sortable="true" data-visible="false">{{ __('IOS Product ID') }}</th>
-                                        @can('item-listing-package-update')
+                                        {{--  @can('item-listing-package-update') --}}
                                             <th scope="col" data-field="status" data-sortable="true" data-align="center" data-formatter="statusSwitchFormatter">{{ __('Status') }}</th>
                                             <th scope="col" data-field="operate" data-escape="false" data-align="center" data-sortable="false" data-events="packageEvents">{{ __('Action') }}</th>
-                                        @endcan
+                                       {{-- @endcan --}}
                                     </tr>
                                     </thead>
                                 </table>
@@ -225,7 +226,7 @@
             </div>
         </div>
 
-    @can('item-listing-package-update')
+    {{-- @can('item-listing-package-update') --}}
         <!-- EDIT MODEL MODEL -->
             <div id="editModal" class="modal fade modal-lg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
                  aria-hidden="true">
@@ -379,7 +380,7 @@
                     </div>
                 </div>
             </div>
-        @endcan
+   {{--  @endcan --}}
     </section>
 @endsection
 @section('js')

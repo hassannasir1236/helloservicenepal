@@ -1,4 +1,5 @@
 @extends('layouts.main')
+@section('page-type', 'Eclassify')
 @section('title')
     {{__("Edit Categories")}}
 @endsection

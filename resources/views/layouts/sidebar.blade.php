@@ -1,10 +1,11 @@
-<!-- <div id="sidebar" class="active">
+<div id="sidebar" class="active">
     <div class="sidebar-wrapper active">
         <div class="sidebar-header position-relative">
             <div class="d-block">
                 <div class="logo text-center">
                     <a href="{{ url('home') }}">
-                        <img src="{{ $company_logo ?? ''}}" data-custom-image="{{url('assets/images/logo/sidebar_logo.png')}}" alt="Logo" srcset="">
+                        <!-- <img src="{{ $company_logo ?? ''}}" data-custom-image="{{url('assets/images/logo/sidebar_logo.png')}}" alt="Logo" srcset=""> -->
+                        <img id="company_logo" src="https://firebasestorage.googleapis.com/v0/b/hello-service-16553.firebasestorage.app/o/images%2FWhatsApp%20Image%202025-02-04%20at%2011_1738732789281.42?alt=media&token=c7cab880-010d-468a-8541-90f255f883d8" data-custom-image="{{asset('assets/images/logo/sidebar_logo.png')}}" alt="Logo">
                     </a>
                 </div>
             </div>
@@ -13,92 +14,92 @@
         <div class="sidebar-menu">
             <ul class="menu">
                 <li class="sidebar-item">
-                    <a href="{{ url('home') }}" class='sidebar-link'>
+                    <a href="{{ url('echome') }}" class='sidebar-link'>
                         <i class="bi  bi-house"></i>
                         <span class="menu-item">{{ __('Dashboard') }}</span>
                     </a>
                 </li>
-                @canany(['category-list','category-create','category-update','category-delete','custom-field-list','custom-field-create','custom-field-update','custom-field-delete'])
+               {{-- @canany(['category-list','category-create','category-update','category-delete','custom-field-list','custom-field-create','custom-field-update','custom-field-delete']) --}}
                     <div class="sidebar-new-title">{{ __('Ads Listing') }}</div>
-                    @canany(['category-list','category-create','category-update','category-delete'])
+                  {{--  @canany(['category-list','category-create','category-update','category-delete']) --}}
                         <li class="sidebar-item sidebar-submenus">
                             <a href="{{ route('category.index') }}" class='sidebar-link'>
                                 <i class="bi bi-list-task"></i>
                                 <span class="menu-item">{{ __('Categories') }}</span>
                             </a>
                         </li>
-                    @endcanany
+                 {{--   @endcanany --}}
 
-                    @canany(['custom-field-list','custom-field-create','custom-field-update','custom-field-delete'])
+                  {{--  @canany(['custom-field-list','custom-field-create','custom-field-update','custom-field-delete']) --}}
                         <li class="sidebar-item sidebar-submenus">
                             <a href="{{ route('custom-fields.index') }} " class='sidebar-link'>
                                 <i class="bi bi-columns-gap"></i>
                                 <span class="menu-item">{{ __('Custom Fields') }}</span>
                             </a>
                         </li>
-                    @endcanany
-                @endcanany
+              {{--   @endcanany  --}}
+              {{--  @endcanany  --}}
 
-                @canany(['item-list','item-create','item-update','item-delete','tip-list','tip-create','tip-update','tip-delete'])
+          {{--  @canany(['item-list','item-create','item-update','item-delete','tip-list','tip-create','tip-update','tip-delete']) --}}
 
                     <div class="sidebar-new-title">{{ __('Items Management') }}</div>
-                    @canany(['item-list','item-create','item-update','item-delete'])
+                    {{--@canany(['item-list','item-create','item-update','item-delete'])--}}
                         <li class="sidebar-item">
                             <a href="{{ Route('item.index') }}" class='sidebar-link'>
                                 <i class="bi bi-ui-radios-grid"></i>
                                 <span class="menu-item">{{ __('Items') }}</span>
                             </a>
                         </li>
-                    @endcanany
-                    @canany(['tip-list','tip-create','tip-update','tip-delete'])
+                    {{--@endcanany--}}
+                   {{-- @canany(['tip-list','tip-create','tip-update','tip-delete'])--}}
                         <li class="sidebar-item sidebar-submenus">
                             <a href="{{ route('tips.index') }}" class='sidebar-link'>
                                 <i class="bi bi-info-circle"></i>
                                 <span class="menu-item">{{ __('Tips') }}</span>
                             </a>
                         </li>
-                    @endcanany
-                @endcanany
+                    {{--@endcanany--}}
+               {{-- @endcanany--}}
 
 
-                @canany(['item-listing-package-list','item-listing-package-create','item-listing-package-update','item-listing-package-delete'])
+               {{-- @canany(['item-listing-package-list','item-listing-package-create','item-listing-package-update','item-listing-package-delete']) --}}
                     <div class="sidebar-new-title">{{ __('Package Management') }}</div>
-                    @canany(['item-listing-package-list','item-listing-package-create','item-listing-package-update','item-listing-package-delete','advertisement-package-list','advertisement-package-create','advertisement-package-update','advertisement-package-delete'])
+                    {{-- @canany(['item-listing-package-list','item-listing-package-create','item-listing-package-update','item-listing-package-delete','advertisement-package-list','advertisement-package-create','advertisement-package-update','advertisement-package-delete']) --}}
                         <li class="sidebar-item sidebar-submenus">
                             <a href="{{ route('package.index') }}" class='sidebar-link'>
                                 <i class="bi bi-list"></i>
                                 <span class="menu-item">{{ __('Item Listing Package') }}</span>
                             </a>
                         </li>
-                    @endcanany
+                    {{-- @endcanany --}}
 
-                    @canany(['advertisement-package-list','advertisement-package-create','advertisement-package-update','advertisement-package-delete','user-package-list'])
+                    {{-- @canany(['advertisement-package-list','advertisement-package-create','advertisement-package-update','advertisement-package-delete','user-package-list']) --}}
                         <li class="sidebar-item sidebar-submenus">
                             <a href="{{ route('package.advertisement.index') }}" class='sidebar-link'>
                                 <i class="bi bi-badge-ad"></i>
                                 <span class="menu-item">{{ __('Advertisement Package') }}</span>
                             </a>
                         </li>
-                    @endcanany
+                    {{-- @endcanany --}}
 
-                    @can('user-package-list')
+                    {{-- @can('user-package-list') --}}
                         <li class="sidebar-item sidebar-submenus">
                             <a href="{{ route('package.users.index') }}" class='sidebar-link'>
                                 <i class="bi bi-person-badge-fill"></i>
                                 <span class="menu-item">{{ __('User Packages') }}</span>
                             </a>
                         </li>
-                    @endcan
+                    {{-- @endcan --}}
 
-                    @can('payment-transactions-list')
+                    {{-- @can('payment-transactions-list') --}}
                         <li class="sidebar-item sidebar-submenus">
                             <a href="{{ route('package.payment-transactions.index') }}" class='sidebar-link'>
                                 <i class="bi bi-cash-coin"></i>
                                 <span class="menu-item">{{ __('Payment Transactions') }}</span>
                             </a>
                         </li>
-                    @endcan
-                @endcanany
+                    {{-- @endcan --}}
+                {{-- @endcanany --}}
 
                 @canany(['seller-verification-field-list','seller-verification-field-create','seller-verification-field-update','seller-verification-field-delete','seller-verification-request-list','seller-verification-request-create','seller-verification-request-update','seller-verification-request-delete'])
                     <div class="sidebar-new-title">{{ __('Seller Verification') }}</div>
@@ -294,4 +295,4 @@
             </ul>
         </div>
     </div>
-</div> -->
+</div>

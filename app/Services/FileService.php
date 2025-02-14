@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use RuntimeException;
-
+use Intervention\Image\ImageManager;
+use Intervention\Image\Encoders\JpegEncoder;
 class FileService {
     /**
      * @param $requestFile
@@ -19,8 +20,13 @@ class FileService {
         $file_name = uniqid('', true) . time() . '.' . $requestFile->getClientOriginalExtension();
         if (in_array($requestFile->getClientOriginalExtension(), ['jpg', 'jpeg', 'png'])) {
             // Check the Extension should be jpg or png and do compression
-            $image = Image::make($requestFile)->encode(null, 60);
-            Storage::disk('public')->put($folder . '/' . $file_name, $image);
+            // $image = Image::make($requestFile)->encode(null, 60);
+            // Storage::disk('public')->put($folder . '/' . $file_name, $image);
+            $manager = ImageManager::gd(); // Or ImageManager::imagick() if Imagick is installed
+            $image = $manager->read($requestFile)->encode(new JpegEncoder(quality: 60)); // Compress to 60%
+
+            $filePath = $folder . '/' . $file_name;
+            Storage::disk('public')->put($filePath, (string) $image);
         } else {
             // Else assign file as it is
             $file = $requestFile;

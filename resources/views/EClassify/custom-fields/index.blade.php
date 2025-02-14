@@ -1,4 +1,5 @@
 @extends('layouts.main')
+@section('page-type', 'Eclassify')
 @section('title')
     {{__("Custom Fields")}}
 @endsection
@@ -10,9 +11,9 @@
                 <h4 class="mb-0">@yield('title')</h4>
             </div>
             <div class="col-12 col-md-6 text-end">
-                @can('custom-field-create')
+                {{--  @can('custom-field-create') --}}
                     <a href="{{ route('custom-fields.create', ['id' => 0]) }}" class="btn btn-primary mb-0">+ {{__("Create Custom Field")}} </a>
-                @endcan
+                {{-- @endcan --}}
             </div>
         </div>
     </div>

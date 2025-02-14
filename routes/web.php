@@ -934,208 +934,456 @@ Route::middleware(['permission:payout-request-provider,payout-request.provider']
     Route::get('/payoutRequests/providers/{id?}', [App\Http\Controllers\PayoutRequestController::class, 'provider'])->name('payoutRequests.providers');
 });
 
-Route::post('store-firebase-service', [App\Http\Controllers\HomeController::class,'storeFirebaseService'])->name('store-firebase-service');
+Route::post('store-firebase-service', [App\Http\Controllers\HomeController::class, 'storeFirebaseService'])->name('store-firebase-service');
 
-Route::post('pay-to-user', [App\Http\Controllers\UserController::class,'payToUser'])->name('pay.user');
-Route::post('check-payout-status', [App\Http\Controllers\UserController::class,'checkPayoutStatus'])->name('check.payout.status');
+Route::post('pay-to-user', [App\Http\Controllers\UserController::class, 'payToUser'])->name('pay.user');
+Route::post('check-payout-status', [App\Http\Controllers\UserController::class, 'checkPayoutStatus'])->name('check.payout.status');
 
 
 // Route::middleware(['permission:zone,zone.list'])->group(function () {
-    Route::get('zone', [App\Http\Controllers\ZoneController::class, 'index'])->name('zone');
+Route::get('zone', [App\Http\Controllers\ZoneController::class, 'index'])->name('zone');
 // });
 // Route::middleware(['permission:zone,zone.create'])->group(function () {
-    Route::get('/zone/create', [App\Http\Controllers\ZoneController::class, 'create'])->name('zone.create');
+Route::get('/zone/create', [App\Http\Controllers\ZoneController::class, 'create'])->name('zone.create');
 // });
 // Route::middleware(['permission:zone,zone.edit'])->group(function () {
-    Route::get('/zone/edit/{id}', [App\Http\Controllers\ZoneController::class, 'edit'])->name('zone.edit');
+Route::get('/zone/edit/{id}', [App\Http\Controllers\ZoneController::class, 'edit'])->name('zone.edit');
 // });
 
 
 // Route::middleware(['permission:documents,document.list'])->group(function () {
 
-    Route::get('/documents', [App\Http\Controllers\DocumentsController::class, 'index'])->name('documents');
+Route::get('/documents', [App\Http\Controllers\DocumentsController::class, 'index'])->name('documents');
 // });
 // Route::middleware(['permission:deleted-documents,document.deleted'])->group(function () {
 
 
-    Route::get('/documents/deleted', [App\Http\Controllers\DocumentsController::class, 'deletedIndex'])->name('documents.deleted');
+Route::get('/documents/deleted', [App\Http\Controllers\DocumentsController::class, 'deletedIndex'])->name('documents.deleted');
 // });
 // Route::middleware(['permission:documents,document.' . ((str_contains(Request::url(), 'save/')) ? ((explode("save/", Request::url())[1]) == 0 ? "create" : "edit") : Request::url())])->group(function () {
 
-    Route::get('/documents/save/{id}', [App\Http\Controllers\DocumentsController::class, 'save'])->name('documents.save');
+Route::get('/documents/save/{id}', [App\Http\Controllers\DocumentsController::class, 'save'])->name('documents.save');
 // });
 
 
 
 // Route::middleware(['permission:report,' . ((str_contains(Request::url(), 'report/')) ? explode("report/", Request::url())[1] : Request::url())])->group(function () {
 
-    Route::get('reports/{type}', [App\Http\Controllers\ReportController::class, 'indexReports'])->name('indexReports.index');
+Route::get('reports/{type}', [App\Http\Controllers\ReportController::class, 'indexReports'])->name('indexReports.index');
 // });
 
 
 // Route::middleware(['permission:service,service.list'])->group(function () {
 
-    Route::get('/services', [App\Http\Controllers\ServiceController::class, 'index'])->name('services');
+Route::get('/services', [App\Http\Controllers\ServiceController::class, 'index'])->name('services');
 // });
 // Route::middleware(['permission:service,service.edit'])->group(function () {
 
-    Route::get('/services/edit/{id}', [App\Http\Controllers\ServiceController::class, 'edit'])->name('services.edit');
+Route::get('/services/edit/{id}', [App\Http\Controllers\ServiceController::class, 'edit'])->name('services.edit');
 // });
 // Route::middleware(['permission:service,service.create'])->group(function () {
 
-    Route::get('/services/create', [App\Http\Controllers\ServiceController::class, 'create'])->name('services.create');
+Route::get('/services/create', [App\Http\Controllers\ServiceController::class, 'create'])->name('services.create');
 // });
 
 
 
 // Route::middleware(['permission:intercity_service,intercity.service.list'])->group(function () {
 
-    Route::get('/intercity-service', [App\Http\Controllers\IntercityServiceController::class, 'index'])->name('intercity-service');
+Route::get('/intercity-service', [App\Http\Controllers\IntercityServiceController::class, 'index'])->name('intercity-service');
 // });
 // Route::middleware(['permission:intercity_service,intercity.service.edit'])->group(function () {
 
-    Route::get('/intercity-service/edit/{id}', [App\Http\Controllers\IntercityServiceController::class, 'edit'])->name('intercity-service.edit');
+Route::get('/intercity-service/edit/{id}', [App\Http\Controllers\IntercityServiceController::class, 'edit'])->name('intercity-service.edit');
 // });
 
 // Route::middleware(['permission:intercity_order,intercity.order.list'])->group(function () {
 
-    Route::get('/intercity-service-rides', [App\Http\Controllers\IntercityServiceController::class, 'ridesList'])->name('intercity-service-rides');
+Route::get('/intercity-service-rides', [App\Http\Controllers\IntercityServiceController::class, 'ridesList'])->name('intercity-service-rides');
 // });
 // Route::middleware(['permission:intercity_order,intercity.order.view'])->group(function () {
 
-    Route::get('/intercity-service-rides/view/{id}', [App\Http\Controllers\IntercityServiceController::class, 'rideView'])->name('intercity-service-rides.view');
+Route::get('/intercity-service-rides/view/{id}', [App\Http\Controllers\IntercityServiceController::class, 'rideView'])->name('intercity-service-rides.view');
 // });
 
 
 // Route::middleware(['permission:freight,freight.list'])->group(function () {
 
-    Route::get('/freight-vehicles', [App\Http\Controllers\FreightVehicleController::class, 'index'])->name('freight-vehicle');
+Route::get('/freight-vehicles', [App\Http\Controllers\FreightVehicleController::class, 'index'])->name('freight-vehicle');
 // });
 
 // Route::middleware(['permission:freight,freight.' . ((str_contains(Request::url(), 'save')) ? (explode("save", Request::url())[1] ? "edit" : "create") : Request::url())])->group(function () {
 
-    Route::get('/freight-vehicles/save/{id?}', [App\Http\Controllers\FreightVehicleController::class, 'save'])->name('freight-vehicles.save');
+Route::get('/freight-vehicles/save/{id?}', [App\Http\Controllers\FreightVehicleController::class, 'save'])->name('freight-vehicles.save');
 // });
 
 
 // Route::middleware(['permission:airports,airports.list'])->group(function () {
 
-    Route::get('/airports', [App\Http\Controllers\AirportsController::class, 'index'])->name('airports');
+Route::get('/airports', [App\Http\Controllers\AirportsController::class, 'index'])->name('airports');
 // });
 // Route::middleware(['permission:airports,airports.' . ((str_contains(Request::url(), 'save')) ? (explode("save", Request::url())[1] ? "edit" : "create") : Request::url())])->group(function () {
 
-    Route::get('/airports/save/{id?}', [App\Http\Controllers\AirportsController::class, 'save'])->name('airport.save');
+Route::get('/airports/save/{id?}', [App\Http\Controllers\AirportsController::class, 'save'])->name('airport.save');
 // });
 
 
 // Route::middleware(['permission:vehicle-type,vehicle.type.list'])->group(function () {
 
-    Route::get('/vehicle-type', [App\Http\Controllers\VehicleTypeController::class, 'index'])->name('vehicle-type');
+Route::get('/vehicle-type', [App\Http\Controllers\VehicleTypeController::class, 'index'])->name('vehicle-type');
 // });
 // Route::middleware(['permission:vehicle-type,vehicle.type.edit'])->group(function () {
 
-    Route::get('/vehicle-type/edit/{id}', [App\Http\Controllers\VehicleTypeController::class, 'edit'])->name('vehicle-type.edit');
+Route::get('/vehicle-type/edit/{id}', [App\Http\Controllers\VehicleTypeController::class, 'edit'])->name('vehicle-type.edit');
 // });
 // Route::middleware(['permission:vehicle-type,vehicle.type.create'])->group(function () {
 
-    Route::get('/vehicle-type/create', [App\Http\Controllers\VehicleTypeController::class, 'create'])->name('vehicle-type.create');
+Route::get('/vehicle-type/create', [App\Http\Controllers\VehicleTypeController::class, 'create'])->name('vehicle-type.create');
 // });
 
 
 
 // Route::middleware(['permission:driver-rules,rule.list'])->group(function () {
 
-    Route::get('/driver-rules', [App\Http\Controllers\DriverRulesController::class, 'rulesIndex'])->name('driver-rules');
+Route::get('/driver-rules', [App\Http\Controllers\DriverRulesController::class, 'rulesIndex'])->name('driver-rules');
 // });
 // Route::middleware(['permission:deleted-driver-rules,rule.delete.list'])->group(function () {
 
-    Route::get('/driver-rules/deleted', [App\Http\Controllers\DriverRulesController::class, 'deletedRulesIndex'])->name('driver-rules.deleted.index');
+Route::get('/driver-rules/deleted', [App\Http\Controllers\DriverRulesController::class, 'deletedRulesIndex'])->name('driver-rules.deleted.index');
 // });
 // Route::middleware(['permission:driver-rules,rule.' . ((str_contains(Request::url(), 'save/')) ? ((explode("save/", Request::url())[1]) == 0 ? "create" : "edit") : Request::url())])->group(function () {
 
-    Route::get('/driver-rules/save/{id}', [App\Http\Controllers\DriverRulesController::class, 'saveRule'])->name('driver-rules.save');
+Route::get('/driver-rules/save/{id}', [App\Http\Controllers\DriverRulesController::class, 'saveRule'])->name('driver-rules.save');
 // });
 
 
 // Route::middleware(['permission:faq,faq.list'])->group(function () {
 
-    Route::get('/faq', [App\Http\Controllers\FAQController::class, 'index'])->name('faq');
+Route::get('/faq', [App\Http\Controllers\FAQController::class, 'index'])->name('faq');
 // });
 // Route::middleware(['permission:faq,faq.' . ((str_contains(Request::url(), 'save')) ? (explode("save", Request::url())[1] ? "edit" : "create") : Request::url())])->group(function () {
 
-    Route::get('/faq/save/{id?}', [App\Http\Controllers\FAQController::class, 'save'])->name('faq.save');
+Route::get('/faq/save/{id?}', [App\Http\Controllers\FAQController::class, 'save'])->name('faq.save');
 // });
 
 // Route::middleware(['permission:sos,sos.list'])->group(function () {
 
-    Route::get('sos', [App\Http\Controllers\SosController::class, 'sos'])->name('sos');
+Route::get('sos', [App\Http\Controllers\SosController::class, 'sos'])->name('sos');
 // });
 // Route::middleware(['permission:sos,sos.edit'])->group(function () {
 
-    Route::get('sos/edit/{id}', [App\Http\Controllers\SosController::class, 'sosEdit'])->name('sos.edit');
+Route::get('sos/edit/{id}', [App\Http\Controllers\SosController::class, 'sosEdit'])->name('sos.edit');
 // });
 
 
 
 // EClassify Routes
 
+// Route::get('page/privacy-policy', static function () {
+//     $privacy_policy = CachingService::getSystemSettings('privacy_policy');
+//     echo htmlspecialchars_decode($privacy_policy);
+// })->name('public.privacy-policy');
+
+// Route::get('page/contact-us', static function () {
+//     $contact_us = CachingService::getSystemSettings('contact_us');
+//     echo htmlspecialchars_decode($contact_us);
+// })->name('public.contact-us');
+
+
+// Route::get('page/terms-conditions', static function () {
+//     $terms_conditions = CachingService::getSystemSettings('terms_conditions');
+//     echo htmlspecialchars_decode($terms_conditions);
+// })->name('public.terms-conditions');
+
+
+// Route::group(['prefix' => 'webhook'], static function () {
+//     Route::post('/stripe', [WebhookController::class, 'stripe']);
+//     Route::post('/paystack', [WebhookController::class, 'paystack']);
+//     Route::post('/razorpay', [WebhookController::class, 'razorpay']);
+// });
+// Route::get('response/paystack/success', [WebhookController::class, 'paystackSuccessCallback'])->name('paystack.success');
+
+/* Non-Authenticated Common Functions */
+Route::group(['prefix' => 'common'], static function () {
+    Route::get('/js/lang', [App\Http\Controllers\EClassify\Controller::class, 'readLanguageFile'])->name('common.language.read');
+});
+// Route::group(['prefix' => 'install'], static function () {
+//     Route::get('purchase-code', [InstallerController::class, 'purchaseCodeIndex'])->name('install.purchase-code.index');
+//     Route::post('purchase-code', [InstallerController::class, 'checkPurchaseCode'])->name('install.purchase-code.post');
+// });
+
+// Route::group(['middleware' => ['auth', 'language']], static function () {
+    /*** Authenticated Common Functions ***/
+    Route::group(['prefix' => 'common'], static function () {
+        Route::put('/change-row-order', [App\Http\Controllers\EClassify\Controller::class, 'changeRowOrder'])->name('common.row-order.change');
+        Route::put('/change-status', [App\Http\Controllers\EClassify\Controller::class, 'changeStatus'])->name('common.status.change');
+    });
+
+
     Route::get('/echome', [App\Http\Controllers\EClassify\HomeController::class, 'index'])->name('echome');
     Route::get('change-password', [App\Http\Controllers\EClassify\HomeController::class, 'changePasswordIndex'])->name('change-password.index');
     Route::post('change-password', [App\Http\Controllers\EClassify\HomeController::class, 'changePasswordUpdate'])->name('change-password.update');
-
+    
     Route::get('change-profile', [App\Http\Controllers\EClassify\HomeController::class, 'changeProfileIndex'])->name('change-profile.index');
     Route::post('change-profile', [App\Http\Controllers\EClassify\HomeController::class, 'changeProfileUpdate'])->name('change-profile.update');
     /*** Home Module : END ***/
-
+    
     /*** Category Module : START ***/
-    Route::resource('category', App\Http\Controllers\EClassify\CategoryController::class);
-    Route::group(['prefix' => 'category'], static function () {
+    Route::resource('EClassify/category', App\Http\Controllers\EClassify\CategoryController::class);
+    Route::group(['prefix' => 'EClassify/category'], static function () {
         Route::get('/{id}/subcategories', [App\Http\Controllers\EClassify\CategoryController::class, 'getSubCategories'])->name('category.subcategories');
         Route::get('/{id}/custom-fields', [App\Http\Controllers\EClassify\CategoryController::class, 'customFields'])->name('category.custom-fields');
         Route::get('/{id}/custom-fields/show', [App\Http\Controllers\EClassify\CategoryController::class, 'getCategoryCustomFields'])->name('category.custom-fields.show');
         Route::delete('/{id}/custom-fields/{customFieldID}/delete', [App\Http\Controllers\EClassify\CategoryController::class, 'destroyCategoryCustomField'])->name('category.custom-fields.destroy');
     });
     /*** Category Module : END ***/
-
+    
     /*** Custom Field Module : START ***/
-    Route::group(['prefix' => 'custom-fields'], static function () {
+    Route::group(['prefix' => 'EClassify/custom-fields'], static function () {
         Route::post('/{id}/value/add', [App\Http\Controllers\EClassify\CustomFieldController::class, 'addCustomFieldValue'])->name('custom-fields.value.add');
         Route::get('/{id}/value/show', [App\Http\Controllers\EClassify\CustomFieldController::class, 'getCustomFieldValues'])->name('custom-fields.value.show');
         Route::put('/{id}/value/edit', [App\Http\Controllers\EClassify\CustomFieldController::class, 'updateCustomFieldValue'])->name('custom-fields.value.update');
         Route::delete('/{id}/value/{value}/delete', [App\Http\Controllers\EClassify\CustomFieldController::class, 'deleteCustomFieldValue'])->name('custom-fields.value.delete');
     });
-    Route::resource('custom-fields', App\Http\Controllers\EClassify\CustomFieldController::class);
-
-  /*** Feature Section Module : START ***/
-  Route::resource('feature-section', App\Http\Controllers\EClassify\FeatureSectionController::class);
-  Route::resource('item', App\Http\Controllers\EClassify\ItemController::class);
+    Route::resource('EClassify/custom-fields', App\Http\Controllers\EClassify\CustomFieldController::class);
+    
+    /*** Custom Field Module : END ***/
 
 
-  Route::group(['prefix' => 'contact-us'], static function () {
-    Route::get('/', [App\Http\Controllers\EClassify\Controller::class, 'contactUsUIndex'])->name('contact-us.index');
-    Route::get('/show', [App\Http\Controllers\EClassify\Controller::class, 'contactUsShow'])->name('contact-us.show');
+    /*NOTE : Improve this mess of routes*/
+/*     Route::group(['prefix' => 'seller-verification'], static function () {
+        Route::put('/{id}/approval', [UserVerificationController::class, 'updateSellerApproval'])->name('seller_verification.approval');
+
+        Route::get('/verification-requests', [UserVerificationController::class, 'show'])->name('verification_requests.show');
+        Route::get('/verification-details/{id}', [UserVerificationController::class, 'getVerificationDetails']);
+        //    Route::get('/user-report/show', [ReportReasonController::class, 'userReportsShow'])->name('report-reasons.user-reports.show');
+        Route::put('/seller-verification/status-change', [UserVerificationController::class, 'updateStatus'])->name('seller-verification.update_status');
+        Route::get('/verification-field/index', [UserVerificationController::class, 'verificationField'])->name('seller-verification.verification-field');
+        Route::get('/verification-field', [UserVerificationController::class, 'showVerificationFields'])->name('verification-field.show');
+        Route::get('/{id}/edit', [UserVerificationController::class, 'edit'])->name('seller-verification.verification-field.edit');
+        Route::put('/{id}', [UserVerificationController::class, 'update'])->name('seller-verification.verification-field.update');
+        Route::delete('/{id}/delete', [UserVerificationController::class, 'destroy'])->name('seller-verification.verification-field.delete');
+
+        Route::post('/{id}/value/add', [UserVerificationController::class, 'addSellerVerificationValue'])->name('seller-verification.value.add');
+        Route::get('/{id}/value/show', [UserVerificationController::class, 'getSellerVerificationValues'])->name('seller-verification.value.show');
+        Route::put('/{id}/value/edit', [UserVerificationController::class, 'updateSellerVerificationValue'])->name('seller-verification.value.update');
+        Route::delete('/{id}/value/{value}/delete', [UserVerificationController::class, 'deleteSellerVerificationValue'])->name('seller-verification.value.delete');
+    }); */
+
+    // Route::resource('seller-verification', UserVerificationController::class);
+
+
+    /*** Item Module : START ***/
+    Route::group(['prefix' => 'EClassify/item'], static function () {
+        Route::put('/{id}/approval', [App\Http\Controllers\EClassify\ItemController::class, 'updateItemApproval'])->name('item.approval');
+    });
+    Route::resource('EClassify/item', App\Http\Controllers\EClassify\ItemController::class);
+    /*** Item Module : END ***/
+
+    /*** Setting Module : START ***/
+    // Route::group(['prefix' => 'settings'], static function () {
+    //     Route::get('/', [SettingController::class, 'index'])->name('settings.index');
+    //     Route::post('/store', [SettingController::class, 'store'])->name('settings.store');
+
+    //     Route::get('system', [SettingController::class, 'page'])->name('settings.system');
+    //     Route::get('about-us', [SettingController::class, 'page'])->name('settings.about-us.index');
+    //     Route::get('privacy-policy', [SettingController::class, 'page'])->name('settings.privacy-policy.index');
+    //     Route::get('contact-us', [SettingController::class, 'page'])->name('settings.contact-us.index');
+    //     Route::get('terms-conditions', [SettingController::class, 'page'])->name('settings.terms-conditions.index');
+
+    //     Route::get('firebase', [SettingController::class, 'page'])->name('settings.firebase.index');
+    //     Route::post('firebase/update', [SettingController::class, 'updateFirebaseSettings'])->name('settings.firebase.update');
+
+    //     Route::get('payment-gateway', [SettingController::class, 'paymentSettingsIndex'])->name('settings.payment-gateway.index');
+    //     Route::post('payment-gateway', [SettingController::class, 'paymentSettingsStore'])->name('settings.payment-gateway.store');
+    //     Route::get('language', [SettingController::class, 'page'])->name('settings.language.index');
+    //     Route::get('admob', [SettingController::class, 'page'])->name('settings.admob.index');
+    //     Route::get('/system-status', [SettingController::class, 'systemStatus'])->name('settings.system-status.index');
+    //     Route::get('/toggle-storage-link', [SettingController::class, 'toggleStorageLink'])->name('toggle.storage.link');
+    //     Route::get('error-logs', [LogViewerController::class, 'index'])->name('settings.error-logs.index');
+    //     Route::get('seo-setting', [SettingController::class, 'page'])->name('settings.seo-settings.index');
+    //     Route::get('file-manager', [SettingController::class, 'page'])->name('settings.file-manager.index');
+    //     Route::post('file-manager-store', [SettingController::class, 'fileManagerSettingStore'])->name('settings.file-manager.store');
+
+    // });
+
+    // Route::group(['prefix' => 'system-update'], static function () {
+    //     Route::get('/', [SystemUpdateController::class, 'index'])->name('system-update.index');
+    //     Route::post('/', [SystemUpdateController::class, 'update'])->name('system-update.update');
+    // });
+    /*** Setting Module : END ***/
+
+    /*** Language Module : START ***/
+    Route::group(['prefix' => 'language'], static function () {
+        Route::get('set-language/{lang}', [App\Http\Controllers\EClassify\LanguageController::class, 'setLanguage'])->name('language.set-current');
+        Route::get('download/panel', [App\Http\Controllers\EClassify\LanguageController::class, 'downloadPanelFile'])->name('language.download.panel.json');
+        Route::get('download/app', [App\Http\Controllers\EClassify\LanguageController::class, 'downloadAppFile'])->name('language.download.app.json');
+        Route::get('download/web', [App\Http\Controllers\EClassify\LanguageController::class, 'downloadWebFile'])->name('language.download.web.json');
+    
+        Route::put('/language/update/{id}/{type}', [App\Http\Controllers\EClassify\LanguageController::class, 'updatelanguage'])->name('updatelanguage');
+        Route::get('languageedit/{id}/{type}', [App\Http\Controllers\EClassify\LanguageController::class, 'editLanguage'])->name('languageedit');
+    });
+    Route::resource('language', App\Http\Controllers\EClassify\LanguageController::class);
+    /*** Language Module : END ***/
+
+    // Route::resource('seo-setting', SeoSettingController::class);
+
+    // /*** User Module : START ***/
+    // Route::group(['prefix' => 'staff'], static function () {
+    //     Route::put('/{id}/change-password', [StaffController::class, 'changePassword'])->name('staff.change-password');
+    // });
+    // Route::resource('staff', StaffController::class);
+
+    // /*** User Module : END ***/
+
+    // /*** Customer Module : START ***/
+    // Route::group(['prefix' => 'customer'], static function () {
+    //     Route::post('/assign-package', [CustomersController::class, 'assignPackage'])->name('customer.assign.package');
+    // });
+    // Route::resource('customer', CustomersController::class);
+
+
+    /*** Customer Module : END ***/
+
+
+    /*** Slider Module : START ***/
+    // Route::resource('slider', SliderController::class);
+    // /*** Slider Module : END ***/
+
+    // /*** Package Module : STARTS ***/
+    Route::group(['prefix' => 'EClassify/package'], static function () {
+        Route::get('/advertisement', [App\Http\Controllers\EClassify\PackageController::class, 'advertisementIndex'])->name('package.advertisement.index');
+        Route::get('/advertisement/show', [App\Http\Controllers\EClassify\PackageController::class, 'advertisementShow'])->name('package.advertisement.show');
+        Route::post('/advertisement/store', [App\Http\Controllers\EClassify\PackageController::class, 'advertisementStore'])->name('package.advertisement.store');
+        Route::put('/advertisement/{id}/update', [App\Http\Controllers\EClassify\PackageController::class, 'advertisementUpdate'])->name('package.advertisement.update');
+        Route::get('/users/', [App\Http\Controllers\EClassify\PackageController::class, 'userPackagesIndex'])->name('package.users.index');
+        Route::get('/users/show', [App\Http\Controllers\EClassify\PackageController::class, 'userPackagesShow'])->name('package.users.show');
+        Route::get('/payment-transactions/', [App\Http\Controllers\EClassify\PackageController::class, 'paymentTransactionIndex'])->name('package.payment-transactions.index');
+        Route::get('/payment-transactions/show', [App\Http\Controllers\EClassify\PackageController::class, 'paymentTransactionShow'])->name('package.payment-transactions.show');
+    });
+    Route::resource('EClassify/package', App\Http\Controllers\EClassify\PackageController::class);
+    /*** Package Module : ENDS ***/
+
+
+    /*** Report Reason Module : START ***/
+    // Route::group(['prefix' => 'report-reasons'], static function () {
+    //     Route::get('/user-report', [ReportReasonController::class, 'usersReports'])->name('report-reasons.user-reports.index');
+    //     Route::get('/user-report/show', [ReportReasonController::class, 'userReportsShow'])->name('report-reasons.user-reports.show');
+    // });
+    // Route::resource('report-reasons', ReportReasonController::class);
+    // /*** Report Reason Module : END ***/
+
+
+    // /*** Notification Module : START ***/
+    // Route::group(['prefix' => 'notification'], static function () {
+    //     Route::delete('/batch-delete', [NotificationController::class, 'batchDelete'])->name('notification.batch.delete');
+    // });
+    // Route::resource('notification', NotificationController::class);
+    // /*** Notification Module : END ***/
+
+
+    // /*** Feature Section Module : START ***/
+    Route::resource('feature-section', App\Http\Controllers\EClassify\FeatureSectionController::class);
+    // /*** Feature Section Module : END ***/
+
+
+    // /*** Roles Module : END ***/
+    // Route::get("/roles-list", [RoleController::class, 'list'])->name('roles.list');
+    // Route::resource('roles', RoleController::class);
+    // /*** Roles Module : END ***/
+
+    // /*** Tips Module : END ***/
+    Route::resource('EClassify/tips', App\Http\Controllers\EClassify\TipController::class);
+    // /*** Tips Module : END ***/
+
+    // /*** Blog Module : END ***/
+    // Route::resource('blog', BlogController::class);
+    // /*** Blog Module : END ***/
+
+    // Route::resource('faq', FaqController::class);
+
+    // Route::group(['prefix' => 'countries'], static function () {
+    //     Route::get("/", [PlaceController::class, 'countryIndex'])->name('countries.index');
+    //     Route::get("/show", [PlaceController::class, 'countryShow'])->name('countries.show');
+    //     Route::post("/import", [PlaceController::class, 'importCountry'])->name('countries.import');
+    //     Route::delete("/{id}/delete", [PlaceController::class, 'destroyCountry'])->name('countries.destroy');
+    // });
+
+    // Route::group(['prefix' => 'states'], static function () {
+    //     Route::get("/", [PlaceController::class, 'stateIndex'])->name('states.index');
+    //     Route::get("/show", [PlaceController::class, 'stateShow'])->name('states.show');
+    //     Route::get("/search", [PlaceController::class, 'stateSearch'])->name('states.search');
+    // });
+
+    // Route::group(['prefix' => 'cities'], static function () {
+    //     Route::get("/", [PlaceController::class, 'cityIndex'])->name('cities.index');
+    //     Route::get("/show", [PlaceController::class, 'cityShow'])->name('cities.show');
+    //     Route::get("/search", [PlaceController::class, 'citySearch'])->name('cities.search');
+    // });
+    // /*** Area Module : START ***/
+    // Route::group(['prefix' => 'area'], static function () {
+    //     Route::get('/', [PlaceController::class, 'createArea'])->name('area.index');
+    //     Route::post('/create', [PlaceController::class, 'addArea'])->name('area.create');
+    //     Route::get("/show/{id}", [PlaceController::class, 'areaShow'])->name('area.show');
+    //     Route::put("/{id}/update-area", [PlaceController::class, 'updateArea'])->name('area.update');
+    //     Route::delete("/{id}/delete-area", [PlaceController::class, 'destroyArea'])->name('area.destroy');
+    //     Route::post('/create-city', [PlaceController::class, 'addCity'])->name('city.create');
+    //     Route::put("/{id}/update", [PlaceController::class, 'updateCity'])->name('city.update');
+    //     Route::delete("/{id}/delete", [PlaceController::class, 'destroyCity'])->name('city.destroy');
+    // });
+
+    Route::group(['prefix' => 'contact-us'], static function () {
+        Route::get('/', [App\Http\Controllers\EClassify\Controller::class, 'contactUsUIndex'])->name('contact-us.index');
+        Route::get('/show', [App\Http\Controllers\EClassify\Controller::class, 'contactUsShow'])->name('contact-us.show');
+    });
+    /*** Area Module : END ***/
+// });
+Route::get('/migrate', static function () {
+    Artisan::call('migrate');
+    echo Artisan::output();
 });
-  /*** Language Module : START ***/
-  Route::group(['prefix' => 'language'], static function () {
-    Route::get('set-language/{lang}', [App\Http\Controllers\EClassify\LanguageController::class, 'setLanguage'])->name('language.set-current');
-    Route::get('download/panel', [App\Http\Controllers\EClassify\LanguageController::class, 'downloadPanelFile'])->name('language.download.panel.json');
-    Route::get('download/app', [App\Http\Controllers\EClassify\LanguageController::class, 'downloadAppFile'])->name('language.download.app.json');
-    Route::get('download/web', [App\Http\Controllers\EClassify\LanguageController::class, 'downloadWebFile'])->name('language.download.web.json');
 
-    Route::put('/language/update/{id}/{type}', [App\Http\Controllers\EClassify\LanguageController::class, 'updatelanguage'])->name('updatelanguage');
-    Route::get('languageedit/{id}/{type}', [App\Http\Controllers\EClassify\LanguageController::class, 'editLanguage'])->name('languageedit');
-});
-Route::resource('language', App\Http\Controllers\EClassify\LanguageController::class);
-Route::group(['prefix' => 'common'], static function () {
-    Route::get('/js/lang', [App\Http\Controllers\EClassify\Controller::class, 'readLanguageFile'])->name('common.language.read');
+Route::get('/migrate-rollback', static function () {
+    Artisan::call('migrate:rollback');
+    echo "done";
 });
 
+Route::get('/seeder', static function () {
+    Artisan::call('db:seed --class=SystemUpgradeSeeder');
+    return redirect()->back();
+});
 
+Route::get('clear', static function () {
+    Artisan::call('config:clear');
+    Artisan::call('view:clear');
+    Artisan::call('cache:clear');
+    Artisan::call('optimize:clear');
+    Artisan::call('debugbar:clear');
+    return redirect()->back();
+});
 
+Route::get('storage-link', static function () {
+    Artisan::call('storage:link');
+});
 
+Route::get('auto-translate/{id}/{type}/{locale}', function ($id, $type, $locale) {
+    Log::info("Running auto-translate with ID: $id, Type: $type, Locale: $locale");
+    $exitCode = Artisan::call('custom:translate-missing', [
+        'type' => $type,
+        'locale' => $locale
+    ]);
+    if ($exitCode === 0) {
+        Log::info("Auto translation completed successfully.");
+        return redirect()->route('languageedit', ['id' => $id, 'type' => $type])
+                         ->with('success', 'Auto translation completed successfully.');
+    } else {
+        Log::error("Auto translation failed with exit code: $exitCode");
+        return redirect()->route('languageedit', ['id' => $id, 'type' => $type])
+                         ->with('error', 'Auto translation failed.');
+    }
+})->name('auto-translate');
 
-
- /*** Category Module : START ***/
+/*** Category Module : START ***/
 //  Route::resource('category', App\Http\Controllers\CategoriesController::class);
 //  Route::group(['prefix' => 'category'], static function () {
 //      Route::get('/{id}/subcategories', [App\Http\Controllers\CategoriesController::class, 'getSubCategories'])->name('category.subcategories');
@@ -1143,5 +1391,5 @@ Route::group(['prefix' => 'common'], static function () {
 //      Route::get('/{id}/custom-fields/show', [App\Http\Controllers\CategoriesController::class, 'getCategoryCustomFields'])->name('category.custom-fields.show');
 //      Route::delete('/{id}/custom-fields/{customFieldID}/delete', [App\Http\Controllers\CategoriesController::class, 'destroyCategoryCustomField'])->name('category.custom-fields.destroy');
 //  })->name('category');
- /*** Category Module : END ***/
+/*** Category Module : END ***/
 

@@ -454,9 +454,16 @@ $role_has_permission = App\Models\Permission::where('role_id',$user->role_id)->p
                     </a>
                 </li>
                 <li>
-                    <a class="waves-effect waves-dark" href="{!! url('category') !!}" aria-expanded="false">
+                    <a class="waves-effect waves-dark" href="{!! url('EClassify/category') !!}" aria-expanded="false">
 
                         <span class="hide-menu">{{trans('lang.category_plural')}}</span>
+
+                    </a>
+                </li>
+                <li>
+                    <a class="waves-effect waves-dark" href="{!! url('EClassify/custom-fields') !!}" aria-expanded="false">
+
+                        <span class="hide-menu">{{trans('lang.custom_fields_plural')}}</span>
 
                     </a>
                 </li>

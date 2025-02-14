@@ -27,21 +27,21 @@ class CustomFieldController extends Controller {
     }
 
     public function index() {
-        ResponseService::noAnyPermissionThenRedirect(['custom-field-list', 'custom-field-create', 'custom-field-update', 'custom-field-delete']);
+       // ResponseService::noAnyPermissionThenRedirect(['custom-field-list', 'custom-field-create', 'custom-field-update', 'custom-field-delete']);
         $categories = Category::get();
-        return view('custom-fields.index', compact('categories'));
+        return view('EClassify.custom-fields.index', compact('categories'));
     }
 
     public function create(Request $request) {
         $languages = CachingService::getLanguages()->where('code', '!=', 'en')->values();
-        ResponseService::noPermissionThenRedirect('custom-field-create');
+       // ResponseService::noPermissionThenRedirect('custom-field-create');
         $cat_id = $request->id ?? 0;
         $categories = HelperService::buildNestedChildSubcategoryObject(Category::get());
-        return view("custom-fields.create", compact('categories', 'cat_id','languages'));
+        return view("EClassify.custom-fields.create", compact('categories', 'cat_id','languages'));
     }
 
     public function store(Request $request) {
-        ResponseService::noPermissionThenSendJson('custom-field-create');
+        //ResponseService::noPermissionThenSendJson('custom-field-create');
         $validator = Validator::make($request->all(), [
             'name'       => 'required',
             'type'       => 'required|in:number,textbox,fileinput,radio,dropdown,checkbox',
@@ -91,7 +91,7 @@ class CustomFieldController extends Controller {
 
     public function show(Request $request) {
         try {
-            ResponseService::noPermissionThenSendJson('custom-field-list');
+           // ResponseService::noPermissionThenSendJson('custom-field-list');
             $offset = $request->input('offset', 0);
             $limit = $request->input('limit', 15);
             $sort = $request->input('sort', 'id');
@@ -114,13 +114,13 @@ class CustomFieldController extends Controller {
 
             foreach ($result as $row) {
                 $operate = '';
-                if (Auth::user()->can('custom-field-update')) {
+                // if (Auth::user()->can('custom-field-update')) {
                     $operate .= BootstrapTableService::editButton(route('custom-fields.edit', $row->id));
-                }
+                // }
 
-                if (Auth::user()->can('custom-field-delete')) {
+                // if (Auth::user()->can('custom-field-delete')) {
                     $operate .= BootstrapTableService::deleteButton(route('custom-fields.destroy', $row->id));
-                }
+                // }
                 $tempRow = $row->toArray();
                 $tempRow['operate'] = $operate;
                 $tempRow['category_names'] = array_column($row->categories->toArray(), 'name');
@@ -138,7 +138,7 @@ class CustomFieldController extends Controller {
     }
 
     public function edit($id) {
-        ResponseService::noPermissionThenRedirect('custom-field-update');
+      //  ResponseService::noPermissionThenRedirect('custom-field-update');
         $custom_field = CustomField::with('custom_field_category')->findOrFail($id);
         $selected_categories = $custom_field->custom_field_category->pluck('category_id')->toArray();
         $categories = HelperService::buildNestedChildSubcategoryObject(Category::get());
@@ -146,7 +146,7 @@ class CustomFieldController extends Controller {
     }
 
     public function update(Request $request, $id) {
-        ResponseService::noPermissionThenSendJson('custom-field-update');
+        // ResponseService::noPermissionThenSendJson('custom-field-update');
         $validator = Validator::make($request->all(), [
             'name'       => 'required',
             'type'       => 'required|in:number,textbox,fileinput,radio,dropdown,checkbox',
@@ -210,7 +210,7 @@ class CustomFieldController extends Controller {
 
     public function destroy($id) {
         try {
-            ResponseService::noPermissionThenSendJson('custom-field-delete');
+           // ResponseService::noPermissionThenSendJson('custom-field-delete');
             CustomField::find($id)->delete();
             ResponseService::successResponse('Custom Field delete successfully');
         } catch (QueryException $th) {
@@ -223,7 +223,7 @@ class CustomFieldController extends Controller {
     }
 
     public function getCustomFieldValues(Request $request, $id) {
-        ResponseService::noPermissionThenSendJson('custom-field-update');
+        // ResponseService::noPermissionThenSendJson('custom-field-update');
         $values = CustomField::findOrFail($id)->values;
 
         if (!empty($request->search)) {
@@ -260,7 +260,7 @@ class CustomFieldController extends Controller {
     }
 
     public function addCustomFieldValue(Request $request, $id) {
-        ResponseService::noPermissionThenSendJson('custom-field-create');
+       // ResponseService::noPermissionThenSendJson('custom-field-create');
         $validator = Validator::make($request->all(), [
             'values' => 'required',
         ]);
@@ -285,7 +285,7 @@ class CustomFieldController extends Controller {
     }
 
     public function updateCustomFieldValue(Request $request, $id) {
-        ResponseService::noPermissionThenSendJson('custom-field-update');
+      //  ResponseService::noPermissionThenSendJson('custom-field-update');
         $validator = Validator::make($request->all(), [
             'old_custom_field_value' => 'required',
             'new_custom_field_value' => 'required',
@@ -312,7 +312,7 @@ class CustomFieldController extends Controller {
 
     public function deleteCustomFieldValue($id, $deletedValue) {
         try {
-            ResponseService::noPermissionThenSendJson('custom-field-delete');
+         //   ResponseService::noPermissionThenSendJson('custom-field-delete');
             $customField = CustomField::findOrFail($id);
             $values = $customField->values;
             unset($values[array_search($deletedValue, $values, true)]);

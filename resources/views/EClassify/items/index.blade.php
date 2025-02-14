@@ -59,9 +59,9 @@
                                 <th scope="col" data-field="state" data-sortable="true" data-visible="true">{{ __('State') }}</th>
                                 <th scope="col" data-field="city" data-sortable="true" data-visible="true">{{ __('City') }}</th>
                                 <th scope="col" data-field="status" data-sortable="true" data-filter-control="select" data-filter-data="" data-escape="false" data-formatter="itemStatusFormatter">{{ __('Status') }}</th>
-                                @can('item-update')
+                               {{-- @can('item-update') --}}
                                     <th scope="col" data-field="active_status" data-sortable="true" data-sort-name="deleted_at" data-visible="true" data-escape="false" data-formatter="statusSwitchFormatter">{{ __('Active') }}</th>
-                                @endcan
+                                {{-- @endcan --}}
                                 <th scope="col" data-field="rejected_reason" data-sortable="true" data-visible="true">{{ __('Rejected Reason') }}</th>
                                 <th scope="col" data-field="created_at" data-sortable="true" data-visible="false">{{ __('Created At') }}</th>
                                 <th scope="col" data-field="updated_at" data-sortable="true" data-visible="false">{{ __('Updated At') }}</th>
@@ -69,9 +69,9 @@
                                 <th scope="col" data-field="category_id" data-sortable="true" data-visible="false">{{ __('Category ID') }}</th>
                                 <th scope="col" data-field="likes" data-sortable="true" data-visible="false">{{ __('Likes') }}</th>
                                 <th scope="col" data-field="clicks" data-sortable="true" data-visible="false">{{ __('Clicks') }}</th>
-                                @canany(['item-update','item-delete'])
+                                {{-- @canany(['item-update','item-delete']) --}}
                                     <th scope="col" data-field="operate" data-align="center" data-sortable="false" data-events="itemEvents" data-escape="false">{{ __('Action') }}</th>
-                                @endcanany
+                                {{-- @endcanany --}}
                             </tr>
                             </thead>
                         </table>

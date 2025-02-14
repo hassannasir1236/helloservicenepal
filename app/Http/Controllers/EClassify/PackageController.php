@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\EClassify;
 
 use App\Models\Category;
 use App\Models\Package;
@@ -15,6 +15,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Throwable;
+use App\Http\Controllers\Controller; 
 
 class PackageController extends Controller {
 
@@ -25,14 +26,14 @@ class PackageController extends Controller {
     }
 
     public function index() {
-        ResponseService::noAnyPermissionThenRedirect(['item-listing-package-list', 'item-listing-package-create', 'item-listing-package-update', 'item-listing-package-delete']);
+        // ResponseService::noAnyPermissionThenRedirect(['item-listing-package-list', 'item-listing-package-create', 'item-listing-package-update', 'item-listing-package-delete']);
         $category = Category::select(['id', 'name'])->where('status', 1)->get();
         $currency_symbol = CachingService::getSystemSettings('currency_symbol');
-        return view('packages.item-listing', compact('category', 'currency_symbol'));
+        return view('EClassify.packages.item-listing', compact('category', 'currency_symbol'));
     }
 
     public function store(Request $request) {
-        ResponseService::noPermissionThenSendJson('item-listing-package-create');
+        // ResponseService::noPermissionThenSendJson('item-listing-package-create');
         $validator = Validator::make($request->all(), [
             'name'                   => 'required',
             'price'                  => 'required|numeric',
@@ -69,7 +70,7 @@ class PackageController extends Controller {
     }
 
     public function show(Request $request) {
-        ResponseService::noPermissionThenSendJson('item-listing-package-list');
+        // ResponseService::noPermissionThenSendJson('item-listing-package-list');
         $offset = $request->offset ?? 0;
         $limit = $request->limit ?? 10;
         $sort = $request->sort ?? 'id';
@@ -87,9 +88,9 @@ class PackageController extends Controller {
         $rows = array();
         foreach ($result as $key => $row) {
             $tempRow = $row->toArray();
-            if (Auth::user()->can('item-listing-package-update')) {
+            // if (Auth::user()->can('item-listing-package-update')) {
                 $tempRow['operate'] = BootstrapTableService::editButton(route('package.update', $row->id), true);
-            }
+            // }
             $rows[] = $tempRow;
         }
 
@@ -98,7 +99,7 @@ class PackageController extends Controller {
     }
 
     public function update(Request $request, $id) {
-        ResponseService::noPermissionThenSendJson('item-listing-package-update');
+        // ResponseService::noPermissionThenSendJson('item-listing-package-update');
         $validator = Validator::make($request->all(), [
             'name'                   => 'required',
             'price'                  => 'required|numeric',
@@ -141,14 +142,14 @@ class PackageController extends Controller {
 
     /* Advertisement Package */
     public function advertisementIndex() {
-        ResponseService::noAnyPermissionThenRedirect(['advertisement-package-list', 'advertisement-package-create', 'advertisement-package-update', 'advertisement-package-delete']);
+        // ResponseService::noAnyPermissionThenRedirect(['advertisement-package-list', 'advertisement-package-create', 'advertisement-package-update', 'advertisement-package-delete']);
         $category = Category::select(['id', 'name'])->where('status', 1)->get();
         $currency_symbol = CachingService::getSystemSettings('currency_symbol');
-        return view('packages.advertisement', compact('category', 'currency_symbol'));
+        return view('EClassify.packages.advertisement', compact('category', 'currency_symbol'));
     }
 
     public function advertisementShow(Request $request) {
-        ResponseService::noPermissionThenSendJson('advertisement-package-list');
+       // ResponseService::noPermissionThenSendJson('advertisement-package-list');
         $offset = $request->offset ?? 0;
         $limit = $request->limit ?? 10;
         $sort = $request->sort ?? 'id';
@@ -168,9 +169,9 @@ class PackageController extends Controller {
             $tempRow = $row->toArray();
             $operate = '';
 //            $operate = '&nbsp;&nbsp;<a  id="' . $row->id . '"  class="btn icon btn-primary btn-sm rounded-pill mt-2 edit_btn editdata"  data-bs-toggle="modal" data-bs-target="#editModal"   title="Edit"><i class="fa fa-edit edit_icon"></i></a>';
-            if (Auth::user()->can('advertisement-package-update')) {
+            // if (Auth::user()->can('advertisement-package-update')) {
                 $operate .= BootstrapTableService::editButton(route('package.advertisement.update', $row->id), true);
-            }
+            // }
 
             $tempRow['operate'] = $operate;
             $rows[] = $tempRow;
@@ -181,7 +182,7 @@ class PackageController extends Controller {
     }
 
     public function advertisementStore(Request $request) {
-        ResponseService::noPermissionThenSendJson('advertisement-package-create');
+        // ResponseService::noPermissionThenSendJson('advertisement-package-create');
         $validator = Validator::make($request->all(), [
             'name'                   => 'required',
             'price'                  => 'required|numeric',
@@ -216,7 +217,7 @@ class PackageController extends Controller {
 
 
     public function advertisementUpdate(Request $request, $id) {
-        ResponseService::noPermissionThenSendJson('advertisement-package-update');
+        // ResponseService::noPermissionThenSendJson('advertisement-package-update');
         $validator = Validator::make($request->all(), [
             'name'                   => 'nullable',
             'price'                  => 'required|numeric',
@@ -255,12 +256,12 @@ class PackageController extends Controller {
     }
 
     public function userPackagesIndex() {
-        ResponseService::noPermissionThenRedirect('user-package-list');
-        return view('packages.user');
+       // ResponseService::noPermissionThenRedirect('user-package-list');
+        return view('EClassify.packages.user');
     }
 
     public function userPackagesShow(Request $request) {
-        ResponseService::noPermissionThenSendJson('user-package-list');
+       // ResponseService::noPermissionThenSendJson('user-package-list');
         $offset = $request->offset ?? 0;
         $limit = $request->limit ?? 10;
         $sort = $request->sort ?? 'id';
@@ -285,12 +286,12 @@ class PackageController extends Controller {
     }
 
     public function paymentTransactionIndex() {
-        ResponseService::noPermissionThenRedirect('payment-transactions-list');
-        return view('packages.payment-transactions');
+        // ResponseService::noPermissionThenRedirect('payment-transactions-list');
+        return view('EClassify.packages.payment-transactions');
     }
 
     public function paymentTransactionShow(Request $request) {
-        ResponseService::noPermissionThenSendJson('user-package-list');
+        // ResponseService::noPermissionThenSendJson('user-package-list');
         $offset = $request->offset ?? 0;
         $limit = $request->limit ?? 10;
         $sort = $request->sort ?? 'id';
