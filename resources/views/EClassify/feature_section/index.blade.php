@@ -14,7 +14,7 @@
 @endsection
 @section('content')
     <section class="section">
-        @can('feature-section-create')
+        {{-- @can('feature-section-create')--}}
             <div class="row">
                 <form action="{{ route('feature-section.store') }}" class="create-form" method="POST" enctype="multipart/form-data" data-parsley-validate>
                     @csrf
@@ -120,7 +120,7 @@
                     </div>
                 </form>
             </div>
-        @endcan
+        {{-- @endcan --}}
 
         <div class="card">
             <div class="card-body">
@@ -151,9 +151,9 @@
                                 <th scope="col" data-field="min_price" data-sortable="true" data-visible="false">{{ __('Min Price') }}</th>
                                 <th scope="col" data-field="max_price" data-sortable="true" data-visible="false">{{ __('Max price') }}</th>
                                 <th scope="col" data-field="values_text" data-sortable="false" data-visible="false">{{ __('Value') }}</th>
-                                @canany(['feature-section-update', 'feature-section-delete'])
+                               {{-- @canany(['feature-section-update', 'feature-section-delete']) --}}
                                     <th scope="col" data-field="operate" data-escape="false" data-sortable="false" data-events="featuredSectionEvents">{{ __('Action') }}</th>
-                                @endcanany
+                                {{-- @endcanany --}}
                             </tr>
                             </thead>
                         </table>
@@ -162,7 +162,7 @@
             </div>
         </div>
 
-        @can('feature-section-update')
+      {{--  @can('feature-section-update') --}}
         <!-- EDIT MODEL MODEL -->
             <div id="editModal" class="modal fade modal-lg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
                 <div class="modal-dialog">
@@ -270,7 +270,7 @@
                     </div>
                 </div>
             </div>
-        @endcan
+       {{-- @endcan --}}
     </section>
 @endsection
 @section('js')

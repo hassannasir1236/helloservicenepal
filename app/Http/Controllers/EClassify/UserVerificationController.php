@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\EClassify;
 
 use App\Models\VerificationField;
 use App\Models\VerificationFieldValue;
@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Storage;
 use Throwable;
 use Validator;
+use App\Http\Controllers\Controller;
 
 class UserVerificationController extends Controller {
     private string $uploadFolder;
@@ -23,23 +24,23 @@ class UserVerificationController extends Controller {
     }
 
     public function index() {
-        ResponseService::noAnyPermissionThenRedirect(['seller-verification-field-list', 'seller-verification-field-create', 'seller-verification-field-update', 'seller-verification-field-delete']);
+        // ResponseService::noAnyPermissionThenRedirect(['seller-verification-field-list', 'seller-verification-field-create', 'seller-verification-field-update', 'seller-verification-field-delete']);
         $verificationRequests = VerificationRequest::with('verificationFieldValue', 'user');
-        return view('seller-verification.index', compact('verificationRequests'));
+        return view('EClassify.seller-verification.index', compact('verificationRequests'));
     }
 
     public function verificationField() {
         // $verificationRequests = VerificationRequest::all();
-        return view('seller-verification.verificationfield');
+        return view('EClassify.seller-verification.verificationfield');
     }
 
     public function create() {
-        ResponseService::noPermissionThenRedirect('seller-verification-field-create');
-        return view('seller-verification.create');
+        // ResponseService::noPermissionThenRedirect('seller-verification-field-create');
+        return view('EClassify.seller-verification.create');
     }
 
     public function store(Request $request) {
-        ResponseService::noPermissionThenSendJson('seller-verification-field-create');
+        // ResponseService::noPermissionThenSendJson('seller-verification-field-create');
         $validator = Validator::make($request->all(), [
             'name'        => 'required',
             'type'        => 'required|in:number,textbox,fileinput,radio,dropdown,checkbox',
@@ -82,7 +83,7 @@ class UserVerificationController extends Controller {
 
     public function show(Request $request) {
         try {
-            ResponseService::noPermissionThenSendJson('seller-verification-request-list');
+            // ResponseService::noPermissionThenSendJson('seller-verification-request-list');
 
             $offset = $request->input('offset', 0);
             $limit = $request->input('limit', 10);
@@ -138,10 +139,10 @@ class UserVerificationController extends Controller {
 
                 $operate = '';
 
-                if (Auth::user()->can('verification_requests-update')) {
+                // if (Auth::user()->can('verification_requests-update')) {
                     $operate .= BootstrapTableService::editButton(route('seller_verification.approval', $row->id), true, '#editStatusModal', 'edit-status', $row->id);
                     $operate .= BootstrapTableService::button('fa fa-eye', '#', ['view-verification-fields', 'btn-light-danger  '], ['title' => __("View"), "data-bs-target" => "#editModal", "data-bs-toggle" => "modal",]);
-                }
+                // }
                 $tempRow = $row->toArray();
                 $tempRow['no'] = $no++;
                 $tempRow['operate'] = $operate;
@@ -158,7 +159,7 @@ class UserVerificationController extends Controller {
     public function showVerificationFields(Request $request) {
         try {
 
-            ResponseService::noPermissionThenSendJson('seller-verification-field-list');
+            // ResponseService::noPermissionThenSendJson('seller-verification-field-list');
             $offset = $request->input('offset', 0);
             $limit = $request->input('limit', 10);
             $sort = $request->input('sort', 'id');
@@ -180,13 +181,13 @@ class UserVerificationController extends Controller {
             foreach ($result as $row) {
                 $tempRow = $row->toArray();
                 $operate = '';
-                if (Auth::user()->can('seller-verification.verification-field.update')) {
+                // if (Auth::user()->can('seller-verification.verification-field.update')) {
                     $operate .= BootstrapTableService::editButton(route('seller-verification.verification-field.edit', $row->id));
-                }
+                // }
 
-                if (Auth::user()->can('verification-field-delete')) {
+                // if (Auth::user()->can('verification-field-delete')) {
                     $operate .= BootstrapTableService::deleteButton(route('seller-verification.verification-field.delete', $row->id));
-                }
+                // }
                 $tempRow['operate'] = $operate;
                 $rows[] = $tempRow;
             }
@@ -201,13 +202,13 @@ class UserVerificationController extends Controller {
     }
 
     public function edit($id) {
-        ResponseService::noPermissionThenRedirect('seller-verification-field-update');
+        // ResponseService::noPermissionThenRedirect('seller-verification-field-update');
         $verification_field = VerificationField::where('id', $id)->withTrashed()->first();
-        return view('seller-verification.edit', compact('verification_field'));
+        return view('EClassify.seller-verification.edit', compact('verification_field'));
     }
 
     public function update(Request $request, $id) {
-        ResponseService::noPermissionThenSendJson('seller-verification-field-update');
+        // ResponseService::noPermissionThenSendJson('seller-verification-field-update');
         $validator = Validator::make($request->all(), [
             'name'       => 'required',
             'type'       => 'required|in:number,textbox,fileinput,radio,dropdown,checkbox',
@@ -238,7 +239,7 @@ class UserVerificationController extends Controller {
 
     public function destroy($id) {
         try {
-            ResponseService::noPermissionThenSendJson('seller-verification-field-delete');
+           // ResponseService::noPermissionThenSendJson('seller-verification-field-delete');
             VerificationField::withTrashed()->find($id)->delete();
             ResponseService::successResponse('seller Verification delete successfully');
         } catch (Throwable $th) {
@@ -248,7 +249,7 @@ class UserVerificationController extends Controller {
     }
 
     public function getSellerVerificationValues(Request $request, $id) {
-        ResponseService::noPermissionThenSendJson('seller-verification-field-update');
+        // ResponseService::noPermissionThenSendJson('seller-verification-field-update');
         $values = VerificationField::where('id', $id)->withTrashed()->first()->values;
 
         if (!empty($request->search)) {
@@ -286,7 +287,7 @@ class UserVerificationController extends Controller {
     }
 
     public function addSellerVerificationValue(Request $request, $id) {
-        ResponseService::noPermissionThenSendJson('seller-verification-field-create');
+        // ResponseService::noPermissionThenSendJson('seller-verification-field-create');
         $validator = Validator::make($request->all(), [
             'values' => 'required',
         ]);
@@ -311,7 +312,7 @@ class UserVerificationController extends Controller {
     }
 
     public function updateSellerVerificationValue(Request $request, $id) {
-        ResponseService::noPermissionThenSendJson('seller-verification-field-update');
+        // ResponseService::noPermissionThenSendJson('seller-verification-field-update');
         $validator = Validator::make($request->all(), [
             'old_verification_field_value' => 'required',
             'new_verification_field_value' => 'required',
@@ -339,7 +340,7 @@ class UserVerificationController extends Controller {
 
     public function deleteSellerVerificationValue($id, $deletedValue) {
         try {
-            ResponseService::noPermissionThenSendJson('seller-verification-field-delete');
+            // ResponseService::noPermissionThenSendJson('seller-verification-field-delete');
             $verification_field = VerificationField::where('id', $id)->withTrashed()->first();
             $values = $verification_field->values;
             unset($values[array_search($deletedValue, $values, true)]);
@@ -354,7 +355,7 @@ class UserVerificationController extends Controller {
 
     public function updateSellerApproval(Request $request, $id) {
         try {
-            ResponseService::noPermissionThenSendJson('seller-verification-field-update');
+            // ResponseService::noPermissionThenSendJson('seller-verification-field-update');
             $verification_field = VerificationRequest::with('user')->findOrFail($id);
             $newStatus = $request->input('status');
             $rejectionReason = $request->input('rejection_reason'); // Get the rejection reason from the request

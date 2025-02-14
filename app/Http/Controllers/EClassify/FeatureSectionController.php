@@ -14,13 +14,13 @@ use App\Http\Controllers\Controller;
 class FeatureSectionController extends Controller {
 
     public function index() {
-        ResponseService::noAnyPermissionThenRedirect(['feature-section-list', 'feature-section-create', 'feature-section-update', 'feature-section-delete']);
+        //  ResponseService::noAnyPermissionThenRedirect(['feature-section-list', 'feature-section-create', 'feature-section-update', 'feature-section-delete']);
         $categories = Category::get();
-        return view('feature_section.index', compact('categories'));
+        return view('EClassify/feature_section.index', compact('categories'));
     }
 
     public function store(Request $request) {
-        ResponseService::noPermissionThenSendJson('feature-section-create');
+        // ResponseService::noPermissionThenSendJson('feature-section-create');
         $validator = Validator::make($request->all(), [
             'title'       => 'required',
             'slug'        => 'required',
@@ -59,7 +59,7 @@ class FeatureSectionController extends Controller {
     }
 
     public function show(Request $request) {
-        ResponseService::noPermissionThenSendJson('feature-section-list');
+        // ResponseService::noPermissionThenSendJson('feature-section-list');
         $offset = $request->input('offset', 0);
         $limit = $request->input('limit', 10);
         $sort = $request->input('sort', 'sequence');
@@ -78,13 +78,13 @@ class FeatureSectionController extends Controller {
         foreach ($result as $row) {
             $tempRow = $row->toArray();
             $operate = '';
-            if (Auth::user()->can('feature-section-update')) {
+            // if (Auth::user()->can('feature-section-update')) {
                 $operate .= BootstrapTableService::editButton(route('feature-section.update', $row->id), true);
-            }
+            // }
 
-            if (Auth::user()->can('feature-section-delete')) {
+            // if (Auth::user()->can('feature-section-delete')) {
                 $operate .= BootstrapTableService::deleteButton(route('feature-section.destroy', $row->id));
-            }
+            // }
             $tempRow['operate'] = $operate;
             $rows[] = $tempRow;
         }
@@ -93,7 +93,7 @@ class FeatureSectionController extends Controller {
     }
 
     public function update(Request $request, $id) {
-        ResponseService::noPermissionThenSendJson('feature-section-update');
+        // ResponseService::noPermissionThenSendJson('feature-section-update');
         $validator = Validator::make($request->all(), [
             'title'       => 'required',
             'description' => 'nullable',
@@ -133,7 +133,7 @@ class FeatureSectionController extends Controller {
 
     public function destroy($id) {
         try {
-            ResponseService::noPermissionThenSendJson('feature-section-delete');
+            // ResponseService::noPermissionThenSendJson('feature-section-delete');
             FeatureSection::findOrFail($id)->delete();
             ResponseService::successResponse('Feature Section delete successfully');
         } catch (Throwable $th) {

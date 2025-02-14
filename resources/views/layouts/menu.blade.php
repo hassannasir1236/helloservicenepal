@@ -467,9 +467,43 @@ $role_has_permission = App\Models\Permission::where('role_id',$user->role_id)->p
 
                     </a>
                 </li>
-
-
                 <li>
+                    <a class="waves-effect waves-dark" href="{{ Route('item.index') }}" class='sidebar-link'>
+                        <i class="bi bi-ui-radios-grid"></i>
+                        <span class="menu-item">{{ __('Items') }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="waves-effect waves-dark" href="{{ route('tips.index') }}" class='sidebar-link'>
+                        <i class="bi bi-info-circle"></i>
+                        <span class="menu-item">{{ __('Tips') }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="waves-effect waves-dark" href="{{ route('package.index') }}" class='sidebar-link'>
+                        <i class="bi bi-list"></i>
+                        <span class="menu-item">{{ __('Item Listing Package') }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="waves-effect waves-dark" href="{{ route('package.advertisement.index') }}" class='sidebar-link'>
+                        <i class="bi bi-badge-ad"></i>
+                        <span class="menu-item">{{ __('Advertisement Package') }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="waves-effect waves-dark" href="{{ route('package.users.index') }}" class='sidebar-link'>
+                        <i class="bi bi-person-badge-fill"></i>
+                        <span class="menu-item">{{ __('User Packages') }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="waves-effect waves-dark" href="{{ route('package.payment-transactions.index') }}" class='sidebar-link'>
+                        <i class="bi bi-cash-coin"></i>
+                        <span class="menu-item">{{ __('Payment Transactions') }}</span>
+                    </a>
+                </li>
+                <!-- <li>
                     <a class="has-arrow waves-effect waves-dark document_menu" href="#" aria-expanded="false">
 
                         <span class="hide-menu">{{trans('lang.document_plural')}}</span>
@@ -488,7 +522,7 @@ $role_has_permission = App\Models\Permission::where('role_id',$user->role_id)->p
                         </li>
                     </ul>
 
-                </li>
+                </li> -->
 
 
             </ul>

@@ -25,9 +25,9 @@
                                     <th scope="col" data-field="id" data-align="center" data-sortable="true">{{ __('ID') }}</th>
                                     <th scope="col" data-field="user_name" data-align="center" data-sortable="true">{{ __('User') }}</th>
                                     <th scope="col" data-field="status" data-align="center" data-sortable="true" data-filter-control="select" data-formatter="sellerverificationStatusFormatter">{{ __('Status') }}</th>
-                                    @canany(['verification_requests-update'])
+                                    {{-- @canany(['verification_requests-update']) --}}
                                         <th scope="col" data-field="operate" data-align="center" data-sortable="false" data-escape="false" data-events="verificationEvents">{{ __('Action') }}</th>
-                                    @endcanany
+                                    {{--@endcanany--}}
                                 </tr>
                             </thead>
                         </table>

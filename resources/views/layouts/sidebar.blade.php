@@ -11,7 +11,7 @@
             </div>
         </div>
 
-        <div class="sidebar-menu">
+        <div class="sidebar-menu" style="background-color: white;">
             <ul class="menu">
                 <li class="sidebar-item">
                     <a href="{{ url('echome') }}" class='sidebar-link'>
@@ -101,46 +101,46 @@
                     {{-- @endcan --}}
                 {{-- @endcanany --}}
 
-                @canany(['seller-verification-field-list','seller-verification-field-create','seller-verification-field-update','seller-verification-field-delete','seller-verification-request-list','seller-verification-request-create','seller-verification-request-update','seller-verification-request-delete'])
+                {{-- @canany(['seller-verification-field-list','seller-verification-field-create','seller-verification-field-update','seller-verification-field-delete','seller-verification-request-list','seller-verification-request-create','seller-verification-request-update','seller-verification-request-delete']) --}}
                     <div class="sidebar-new-title">{{ __('Seller Verification') }}</div>
-                    @canany(['seller-verification-request-list','seller-verification-request-create','seller-verification-request-update','seller-verification-request-delete'])
+                    {{-- @canany(['seller-verification-request-list','seller-verification-request-create','seller-verification-request-update','seller-verification-request-delete']) --}}
                         <li class="sidebar-item">
                             <a href="{{ route('seller-verification.verification-field') }}" class='sidebar-link'>
                                 <i class="bi bi-grid-1x2"></i>
                                 <span class="menu-item">{{ __('Verification Fields') }}</span>
                             </a>
                         </li>
-                    @endcanany
+                    {{-- @endcanany  --}}
 
-                    @canany(['seller-verification-field-list','seller-verification-field-create','seller-verification-field-update','seller-verification-field-delete'])
+                    {{-- @canany(['seller-verification-field-list','seller-verification-field-create','seller-verification-field-update','seller-verification-field-delete'])  --}}
                         <li class="sidebar-item">
                             <a href="{{route('seller-verification.index') }}" class='sidebar-link'>
                                 <i class="bi bi-sliders2"></i>
                                 <span class="menu-item">{{ __('Seller Verification') }}</span>
                             </a>
                         </li>
-                    @endcanany
-                @endcanany
-                @canany(['slider-list','slider-create','slider-update','slider-delete','feature-section-list','feature-section-create','feature-section-update','feature-section-delete'])
+                    {{-- @endcanany --}}
+                {{-- @endcanany --}}
+                {{-- @canany(['slider-list','slider-create','slider-update','slider-delete','feature-section-list','feature-section-create','feature-section-update','feature-section-delete']) --}}
                     <div class="sidebar-new-title">{{ __('Home Screen Management') }}</div>
-                    @canany(['slider-list','slider-create','slider-update','slider-delete'])
+                    {{-- @canany(['slider-list','slider-create','slider-update','slider-delete'])--}}
                         <li class="sidebar-item">
-                            <a href="{{ url('slider') }}" class='sidebar-link'>
+                            <a href="{{ url('EClassify/slider') }}" class='sidebar-link'>
                                 <i class="bi bi-sliders2"></i>
                                 <span class="menu-item">{{ __('Slider') }}</span>
                             </a>
                         </li>
-                    @endcanany
+                    {{-- @endcanany--}}
 
-                    @canany(['feature-section-list','feature-section-create','feature-section-update','feature-section-delete'])
+                    {{-- @canany(['feature-section-list','feature-section-create','feature-section-update','feature-section-delete'])--}}
                         <li class="sidebar-item">
                             <a href="{{ route('feature-section.index') }}" class='sidebar-link'>
                                 <i class="bi bi-grid-1x2"></i>
                                 <span class="menu-item">{{ __('Feature Section') }}</span>
                             </a>
                         </li>
-                    @endcanany
-                @endcanany
+                    {{-- @endcanany --}}
+                {{-- @endcanany --}}
 
                 @canany(['country-list','country-create','country-update','country-delete','state-list','state-create','state-update','state-delete','city-list','city-create','city-update','city-delete'])
                     <div class="sidebar-new-title">{{ __('Place/Location Management') }}</div>

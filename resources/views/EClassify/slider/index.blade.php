@@ -18,7 +18,7 @@
 @section('content')
     <section class="section">
         <div class="row">
-            @can('slider-create')
+            {{-- @can('slider-create') --}}
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-content">
@@ -82,10 +82,11 @@
                         </div>
                     </div>
                 </div>
-            @endcan
+            {{-- @endcan --}}
 
 
-            <div class="{{\Illuminate\Support\Facades\Auth::user()->can('slider-create') ? "col-md-8" : "col-md-12"}}">
+            <!-- <div class="{{\Illuminate\Support\Facades\Auth::user()->can('slider-create') ? "col-md-8" : "col-md-12"}}"> -->
+            <div class="{{\Illuminate\Support\Facades\Auth::user()->can('slider-create') ? "col-md-8" : "col-md-8"}}">
                 <div class="card">
                     <div class="card-content">
                         <div class="row mt-1">
@@ -112,9 +113,9 @@
                                                 <th scope="col" data-field="model_type" data-align="center" data-sortable="true" data-formatter="typeFormatter">{{ __('Type') }}</th>
                                                 <th scope="col" data-field="model.name" data-sort-name="" data-align="center" data-sortable="true">{{ __('Name') }}</th>
                                                 <th scope="col" data-field="third_party_link" data-align="center" data-sortable="true">{{ __('Third Party Link') }}</th>
-                                                @can('slider-delete')
+                                               {{-- @can('slider-delete') --}}
                                                     <th scope="col" data-field="operate" data-escape="false" data-align="center" data-sortable="false">{{ __('Action') }}</th>
-                                                @endcan
+                                                {{-- @endcan --}}
                                             </tr>
                                             </thead>
                                         </table>

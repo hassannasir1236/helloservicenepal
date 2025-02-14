@@ -1,5 +1,5 @@
 <header>
-    <nav class="navbar navbar-expand navbar-light" style="background-color: white;">
+    <nav class="navbar navbar-expand navbar-light" style="background-color: #bf0d0d;">
         <div class="container-fluid">
 
             <div class="col-6 row d-flex align-items-center">

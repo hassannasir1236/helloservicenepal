@@ -1151,26 +1151,25 @@ Route::group(['prefix' => 'common'], static function () {
 
 
     /*NOTE : Improve this mess of routes*/
-/*     Route::group(['prefix' => 'seller-verification'], static function () {
-        Route::put('/{id}/approval', [UserVerificationController::class, 'updateSellerApproval'])->name('seller_verification.approval');
+    Route::group(['prefix' => 'EClassify/seller-verification'], static function () {
+        Route::put('/{id}/approval', [App\Http\Controllers\EClassify\UserVerificationController::class, 'updateSellerApproval'])->name('seller_verification.approval');
 
-        Route::get('/verification-requests', [UserVerificationController::class, 'show'])->name('verification_requests.show');
-        Route::get('/verification-details/{id}', [UserVerificationController::class, 'getVerificationDetails']);
+        Route::get('/verification-requests', [App\Http\Controllers\EClassify\UserVerificationController::class, 'show'])->name('verification_requests.show');
+        Route::get('/verification-details/{id}', [App\Http\Controllers\EClassify\UserVerificationController::class, 'getVerificationDetails']);
         //    Route::get('/user-report/show', [ReportReasonController::class, 'userReportsShow'])->name('report-reasons.user-reports.show');
-        Route::put('/seller-verification/status-change', [UserVerificationController::class, 'updateStatus'])->name('seller-verification.update_status');
-        Route::get('/verification-field/index', [UserVerificationController::class, 'verificationField'])->name('seller-verification.verification-field');
-        Route::get('/verification-field', [UserVerificationController::class, 'showVerificationFields'])->name('verification-field.show');
-        Route::get('/{id}/edit', [UserVerificationController::class, 'edit'])->name('seller-verification.verification-field.edit');
-        Route::put('/{id}', [UserVerificationController::class, 'update'])->name('seller-verification.verification-field.update');
-        Route::delete('/{id}/delete', [UserVerificationController::class, 'destroy'])->name('seller-verification.verification-field.delete');
+        Route::put('/seller-verification/status-change', [App\Http\Controllers\EClassify\UserVerificationController::class, 'updateStatus'])->name('seller-verification.update_status');
+        Route::get('/verification-field/index', [App\Http\Controllers\EClassify\UserVerificationController::class, 'verificationField'])->name('seller-verification.verification-field');
+        Route::get('/verification-field', [App\Http\Controllers\EClassify\UserVerificationController::class, 'showVerificationFields'])->name('verification-field.show');
+        Route::get('/{id}/edit', [App\Http\Controllers\EClassify\UserVerificationController::class, 'edit'])->name('seller-verification.verification-field.edit');
+        Route::put('/{id}', [App\Http\Controllers\EClassify\UserVerificationController::class, 'update'])->name('seller-verification.verification-field.update');
+        Route::delete('/{id}/delete', [App\Http\Controllers\EClassify\UserVerificationController::class, 'destroy'])->name('seller-verification.verification-field.delete');
 
-        Route::post('/{id}/value/add', [UserVerificationController::class, 'addSellerVerificationValue'])->name('seller-verification.value.add');
-        Route::get('/{id}/value/show', [UserVerificationController::class, 'getSellerVerificationValues'])->name('seller-verification.value.show');
-        Route::put('/{id}/value/edit', [UserVerificationController::class, 'updateSellerVerificationValue'])->name('seller-verification.value.update');
-        Route::delete('/{id}/value/{value}/delete', [UserVerificationController::class, 'deleteSellerVerificationValue'])->name('seller-verification.value.delete');
-    }); */
-
-    // Route::resource('seller-verification', UserVerificationController::class);
+        Route::post('/{id}/value/add', [App\Http\Controllers\EClassify\UserVerificationController::class, 'addSellerVerificationValue'])->name('seller-verification.value.add');
+        Route::get('/{id}/value/show', [App\Http\Controllers\EClassify\UserVerificationController::class, 'getSellerVerificationValues'])->name('seller-verification.value.show');
+        Route::put('/{id}/value/edit', [App\Http\Controllers\EClassify\UserVerificationController::class, 'updateSellerVerificationValue'])->name('seller-verification.value.update');
+        Route::delete('/{id}/value/{value}/delete', [App\Http\Controllers\EClassify\UserVerificationController::class, 'deleteSellerVerificationValue'])->name('seller-verification.value.delete');
+    }); 
+    Route::resource('EClassify/seller-verification', App\Http\Controllers\EClassify\UserVerificationController::class);
 
 
     /*** Item Module : START ***/
@@ -1247,7 +1246,7 @@ Route::group(['prefix' => 'common'], static function () {
 
 
     /*** Slider Module : START ***/
-    // Route::resource('slider', SliderController::class);
+    Route::resource('EClassify/slider', App\Http\Controllers\EClassify\SliderController::class);
     // /*** Slider Module : END ***/
 
     // /*** Package Module : STARTS ***/
@@ -1283,7 +1282,7 @@ Route::group(['prefix' => 'common'], static function () {
 
 
     // /*** Feature Section Module : START ***/
-    Route::resource('feature-section', App\Http\Controllers\EClassify\FeatureSectionController::class);
+    Route::resource('EClassify/feature-section', App\Http\Controllers\EClassify\FeatureSectionController::class);
     // /*** Feature Section Module : END ***/
 
 

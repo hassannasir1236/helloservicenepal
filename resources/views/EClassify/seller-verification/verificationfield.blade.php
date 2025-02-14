@@ -10,9 +10,9 @@
                 <h4 class="mb-0">@yield('title')</h4>
             </div>
             <div class="col-12 col-md-6 text-end">
-                @can('custom-field-create')
+                {{-- @can('custom-field-create') --}}
                     <a href="{{ route('seller-verification.create') }}" class="btn btn-primary mb-0">+ {{__("Create Verification Field")}} </a>
-                @endcan
+                {{-- @endcan --}}
             </div>
         </div>
     </div>
@@ -41,9 +41,9 @@
                                     <th scope="col" data-field="max_length" data-align="center" data-sortable="true">{{ __('Max Length') }}</th>
                                     <th scope="col" data-field="values" data-align="center" data-sortable="true">{{ __('Values') }}</th>
                                     {{-- <th scope="col" data-field="status" data-align="center" data-sortable="true" data-filter-control="select" data-formatter="sellerverificationStatusFormatter">{{ __('Status') }}</th> --}}
-                                    @canany(['verification-field-update','verification-field-delete'])
+                                     {{-- @canany(['verification-field-update','verification-field-delete']) --}}
                                         <th scope="col" data-field="operate" data-align="center" data-sortable="false" data-escape="false" data-events="verificationfeildEvents">{{ __('Action') }}</th>
-                                    @endcanany
+                                    {{-- @endcanany --}}
                                 </tr>
                             </thead>
                         </table>

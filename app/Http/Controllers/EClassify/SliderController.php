@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\EClassify;
 
 use App\Models\Category;
 use App\Models\Item;
@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Throwable;
-
+use App\Http\Controllers\Controller;
 class SliderController extends Controller {
 
     private string $uploadFolder;
@@ -23,11 +23,11 @@ class SliderController extends Controller {
     }
 
     public function index() {
-        ResponseService::noAnyPermissionThenRedirect(['slider-list', 'slider-create', 'slider-update', 'slider-delete']);
+        // ResponseService::noAnyPermissionThenRedirect(['slider-list', 'slider-create', 'slider-update', 'slider-delete']);
         $slider = Slider::select(['id', 'image', 'sequence'])->orderBy('sequence', 'ASC')->get();
         $items = Item::where('status', 'approved')->get();
         $categories = Category::where('status', 1)->get();
-        return view('slider.index', compact('slider', 'items', 'categories'));
+        return view('EClassify.slider.index', compact('slider', 'items', 'categories'));
     }
 
     public function store(Request $request) {
@@ -36,7 +36,7 @@ class SliderController extends Controller {
             ResponseService::validationError('At least one of the fields (Category, Item, or Third Party Link) is required.');
         }
 
-        ResponseService::noPermissionThenRedirect('slider-create');
+        // ResponseService::noPermissionThenRedirect('slider-create');
         $validator = Validator::make($request->all(), [
             'image.*' => 'required|image|mimes:jpg,png,jpeg|max:2048',
         ]);
@@ -70,7 +70,7 @@ class SliderController extends Controller {
     }
 
     public function destroy($id) {
-        ResponseService::noPermissionThenRedirect('slider-delete');
+        // ResponseService::noPermissionThenRedirect('slider-delete');
         try {
             $slider = Slider::find($id);
             if ($slider) {
@@ -90,7 +90,7 @@ class SliderController extends Controller {
     }
 
     public function show(Request $request) {
-        ResponseService::noPermissionThenRedirect('slider-list');
+        // ResponseService::noPermissionThenRedirect('slider-list');
         $offset = $request->offset ?? 0;
         $limit = $request->limit ?? 10;
         $sort = $request->sort ?? 'id';
@@ -108,9 +108,9 @@ class SliderController extends Controller {
         foreach ($result as $key => $row) {
             $tempRow = $row->toArray();
             $operate = '';
-            if (Auth::user()->can('slider-delete')) {
+            // if (Auth::user()->can('slider-delete')) {
                 $operate .= BootstrapTableService::deleteButton(route('slider.destroy', $row->id));
-            }
+            // }
             $tempRow['operate'] = $operate;
             $rows[] = $tempRow;
         }
